@@ -36,6 +36,34 @@ module.exports.educationCategories = async (req, res, next) => {
 
 };
 
+module.exports.videos = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        const cfID = req.body.cfID;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await ClientSessions.findOne({ cfID: cfID });
+        if (cookieID == session.cookieID) {
+            const { categoryID } = req.body;
+            const videos = await Videos.find({ categoryID : categoryID });
+            return res.json({ status: true, data: videos });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+};
+
 module.exports.leaderboard = async (req, res, next) => {
     try {
         let cookieID;
