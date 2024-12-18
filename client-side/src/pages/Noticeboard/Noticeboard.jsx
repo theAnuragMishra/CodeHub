@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../pages.css';
-import './NoticeBoard.css';
+import './Noticeboard.css';
 import NavBarSecond from '../../components/NavBar/NavBarSecond';
 import NavSpace from '../../components/NavSpace';
 import Spinner from '../../components/Spinner/Spinner';

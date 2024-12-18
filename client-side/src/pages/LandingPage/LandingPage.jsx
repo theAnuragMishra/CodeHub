@@ -2,7 +2,7 @@ import React from 'react'
 import NavBar from '../../components/NavBar/NavBar'
 import Welcome from './Welcome/Welcome'
 import "./LandingPage.css"
-import TeamMember from '../Team/TeamMember'
+// import TeamMember from '../Team/TeamMember'
 import MotiveAchievements from './MotiveAchievements/MotiveAchievements'
 import OurEvents from './OurEvents/OurEvents'
 import QuickLinkAboutUs from './QuickLinksAboutUs/QuickLinkAboutUs'
