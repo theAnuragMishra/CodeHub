@@ -64,6 +64,48 @@ module.exports.leaderboard = async (req, res, next) => {
 
 };
 
+module.exports.register = async (req, res, next) => {
+    try {
+        const { cfID, password } = req.body;
+        const cfIDCheck = await Users.findOne({ cfID: cfID });
+        if (cfIDCheck) return res.json({ status: false, msg: "User already exist" });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await Users.create({ cfID: cfID, password: hashedPassword });
+        delete user.password;
+        return res.json({ status: true, user });
+    }
+    catch (ex) {
+        next(ex);
+    }
+};
+
+module.exports.login = async (req, res, next) => {
+    try {
+        const { cfID, password } = req.body;
+        const user = await Users.findOne({ cfID: cfID });
+        if (!user) return res.json({ status: false, msg: "Incorrect ID or Password" });
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) return res.json({ status: false, msg: "Incorrect Username or Password" });
+        const cookieID = randomUUID();
+        const session = await ClientSessions.findOne({ cfID: cfID });
+        console.log(session);
+        if (session)
+            await ClientSessions.deleteOne({ cfID: cfID });
+        await ClientSessions.create({ cfID: cfID, cookieID: cookieID });
+        const cookie = jwt.sign(
+            { "cookieID": cookieID },
+            process.env.COOKIE_SECRET_KEY,
+            { expiresIn: "1d" }
+        );
+        res.cookie("jwt", cookie, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+        return res.json({ status: true, data: { cfID: user.cfID } });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
+
 module.exports.contactUs = async (req, res, next) => {
     try {
         let cookieID;
