@@ -63,7 +63,6 @@ module.exports.videos = async (req, res, next) => {
         next(ex);
     }
 };
-
 module.exports.leaderboard = async (req, res, next) => {
     try {
         let cookieID;

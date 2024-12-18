@@ -45,6 +45,10 @@ mongoose
     .catch((err) => {
         console.log(err.message);
     });
+
+app.use("/admin", adminRoutes);
+app.use(process.env.REACT_APP_BASE_URL + "/", clientRoutes);
+
 const server = app.listen(process.env.PORT, () =>
     console.log(`Server started on port ${process.env.PORT}`)
 );

@@ -31,6 +31,179 @@ module.exports.adminLogin = async (req, res, next) => {
 
 };
 
+module.exports.notice = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await AdminSessions.findOne({ username: username });
+        if (cookieID == session.cookieID) {
+            const notices = await Notices.find();
+            return res.json({ status: true, data: notices });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
+
+module.exports.noticeDelete = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await AdminSessions.findOne({ username: username });
+        if (cookieID == session.cookieID) {
+            const { noticeID } = req.body;
+            const notice = await Notices.find({ _id: noticeID });
+            if (!notice) return res.json({ status: false, msg: "Notice doesn't exist" });
+            await Notices.remove({ _id: noticeID });
+            return res.json({ status: true });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
+
+module.exports.noticeCreate = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await AdminSessions.findOne({ username: username });
+        if (cookieID == session.cookieID) {
+            const { title, body } = req.body;
+            const notice = await Notices.find({ title: title });
+            if (notice) return res.json({ status: false, msg: "Notice title already exist" });
+            await Notices.create({ title: title, body: body });
+            return res.json({ status: true });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
+
+module.exports.educationCategories = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await AdminSessions.findOne({ username: username });
+        if (cookieID == session.cookieID) {
+            const educationCategories = await EducationCategories.find();
+            return res.json({ status: true, data: educationCategories });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
+
+module.exports.educationDelete = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await AdminSessions.findOne({ username: username });
+        if (cookieID == session.cookieID) {
+            const { educationID } = req.body;
+            const educationCategory = await EducationCategories.find({ _id: educationID });
+            if (!educationCategory) return res.json({ status: false, msg: "Education Category doesn't exist" });
+            await EducationCategories.remove({ _id: educationCategory });
+            return res.json({ status: true });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
+
+module.exports.educationCreate = async (req, res, next) => {
+    try {
+        let cookieID;
+        const cookie = req.cookies.jwt;
+        jwt.verify(
+            cookie,
+            process.env.COOKIE_SECRET_KEY,
+            (err, decoded) => {
+                if (err)
+                    return res.json({ status: false, msg: "Invalid cookieID" });
+                cookieID = decoded.cookieID;
+            }
+        );
+        const session = await AdminSessions.findOne({ username: username });
+        if (cookieID == session.cookieID) {
+            const { title } = req.body;
+            const educationCategory = await EducationCategories.find({ title: title });
+            if (educationCategory) return res.json({ status: false, msg: "Education Category title already exist" });
+            await EducationCategories.create({ title: title });
+            return res.json({ status: true });
+        }
+        else
+            return res.json({ status: false, msg: "Session expired" });
+    }
+    catch (ex) {
+        next(ex);
+    }
+
+};
 
 module.exports.videos = async (req, res, next) => {
     try {
