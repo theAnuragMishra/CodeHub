@@ -16,20 +16,16 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-
-
-
 app.use(function (req, res, next) {
     const origin = req.headers.origin;
-    console.log("request origin: ", origin);
-    res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_PATH);
+    res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Authorization, authorization, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    // if (req.method === 'OPTIONS') {
-    //     return res.status(200).end();  // Respond with 200 OK for preflight
-    // }
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();  // Respond with 200 OK for preflight
+    }
     next();
 });
 
@@ -47,7 +43,8 @@ mongoose
     });
 
 app.use("/admin", adminRoutes);
-app.use(process.env.REACT_APP_BASE_URL + "/", clientRoutes);
+app.use("/", clientRoutes);
+// app.use(process.env.REACT_APP_BASE_URL + "/", clientRoutes);
 
 const server = app.listen(process.env.PORT, () =>
     console.log(`Server started on port ${process.env.PORT}`)
