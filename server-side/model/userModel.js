@@ -12,7 +12,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 8,
+    },
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    emailVerified: {
+        type: Boolean,
+        default: false,
+    },
+    cfVerified: {
+        type: Boolean,
+        default: false,
     }
-});
+},
+    { timestamps: true }
+);
 
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("User", userSchema);

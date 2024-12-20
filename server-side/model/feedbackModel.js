@@ -6,12 +6,10 @@ const feedbackSchema = new mongoose.Schema({
         required: true,
         min: 1,
         max: 50,
-        unique: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true,
         max: 50,
     },
     message: {

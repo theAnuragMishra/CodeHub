@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
 
 const clientSessionSchema = new mongoose.Schema({
-    cfID: {
+    userId: {
         type: String,
         required: true,
-        min: 1,
-        max: 50,
-        unique: true,
     },
     cookieID: {
         type: String,
