@@ -1,102 +1,103 @@
-import React, { useContext } from 'react'
-import "./NavBar.css";
-import CodeHubSingleLine from "./Assets/Logos/CodeHubLarge.png";
+
+import { useNavigate } from "react-router-dom";
 import CodeHubLogo from "./Assets/Logos/CodeHubSmall.png";
-import { useNavigate } from 'react-router-dom';
-import { loginContext } from '../../loginContext';
+import HamburgerMenu from "./HamburgerMenu";
+// import { Toaster } from "react-hot-toast";
+// import logo from "../../assets/general/logo.webp";
 
-export default function NavBar() {
-
+function Navbar() {
     const navigate = useNavigate();
-    const {login} = useContext(loginContext);
 
-    //FUNCTION FOR MENU
-    const onClickMenu = () => {
-        const body = document.getElementsByTagName("BODY")[0];
-        if (body.style.overflow !== "hidden") {
-            body.style.height = "100vh";
-            body.style.overflow = "hidden";
-        }
-        else {
-            body.style.height = "auto";
-            body.style.overflow = "auto";
-        }
-        document.getElementById("navItemsMain").classList.toggle("navChangedMain");
-    }
-
-    //FUNCTION FOR SCROLL
-    const scroll = (target) => {
-        const section = document.querySelector(`#${target}`);
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const handleLogoClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigate("/");
     };
+
 
     return (
         <>
+            {/* Render for larger screens */}
+            <div className="w-[100vw] bg-black  custom1980:h-[92px] md:h-[60px] px-8 py-2 fixed bg-scheduleLargeText items-center justify-between z-50 md:flex hidden">
+                <img
+                    src={CodeHubLogo}
+                    className="logo hover:cursor-pointer w-auto h-10 object-contain bg-transparent"
+                    onClick={handleLogoClick}
+                />
 
-            {/* --------------HTML FOR DESKTOP EXPERIENCE---------------- */}
-            <div id='navBar1Main'>
-                <div id='navBar11Main'>
-                    <img onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/")} src={CodeHubSingleLine} alt="Code Hub" />
+                <div className="text-white navlinks w-[67%] flex h-full items-center justify-between font-bebas md:text-[1.6vw]">
+                    <h2
+                        className="hover:text-accent tracking-widest transition-colors cursor-pointer duration-300"
+                        onClick={() => navigate("/")}
+                    >
+                        HOME
+                    </h2>
+                    {/* <h1
+                        className="hover:text-register tracking-widest transition-colors cursor-pointer duration-300"
+                        onClick={() => scroll("aboutUsMain")}
+                    >
+                        ABOUT US
+                    </h1> */}
+                    <h2
+                        className="hover:text-accent tracking-widest transition-colors cursor-pointer duration-300"
+                        onClick={() => navigate("/contact-us")}
+                    >
+                        Contact Us
+                    </h2>
+                    {/* <h1
+                        className="hover:text-register tracking-widest transition-colors cursor-pointer duration-300"
+                        onClick={() => {
+                            navigate("/team");
+                        }}
+                    >
+                        MOTIVE
+                    </h1> */}
+                    {/* <h1
+                        className="hover:text-register tracking-widest transition-colors cursor-pointer duration-300"
+                        onClick={() => {
+                            navigate("/sponsors");
+                        }}
+                    >
+                        EVENTS
+                    </h1> */}
+                    <h2
+                        className="hover:text-accent tracking-widest transition-colors cursor-pointer duration-300"
+                        onClick={() => {
+                            navigate("/notice-board");
+                        }}
+                    >
+                        NoticeBoard
+                    </h2>
                 </div>
-                <div id='navBar12Main'>
-                    <button onClick={() => scroll("welcomeMain")} className='navBar121Main'>
-                        Home
-                    </button>
-                    <button onClick={() => scroll("aboutUsMain")} className='navBar121Main'>
-                        About Us
-                    </button>
-                    {/* <button onClick={() => scroll("teamsMain")} className='navBar121Main'>
-                        Teams
-                    </button> */}
-                    <button onClick={() => scroll("motiveMain")} className='navBar121Main'>
-                        Motive
-                    </button>
-                    {/* <button onClick={() => scroll("achievementsMain")} className='navBar121Main'>
-                        Achievments
-                    </button> */}
-                    <button onClick={() => scroll("ourEventsMain")} className='navBar121Main'>
-                        Events
-                    </button>
-                    <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/notice-board")} className='navBar121Main'>
-                        Notice Board
-                    </button>
-                    <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/login")} id='navBar122Main'>
-                    {login ? "Logout" : "Login"} 
-                    </button>
+
+
+                <button
+                    onClick={() => {
+                        navigate("/login");
+                    }}
+                    className="auth rounded-lg w-[11vw] bg-[#008CFF] lg:w-[7.1vw] h-[47px] tracking-wider text-white items-center justify-center font-semibold font-bebas hover:text-primary hover:bg-accent transition-all duration-500"
+                >
+                    <h1 className="lg:text-[1.3vw] md:text-[1.5vw] ">Login</h1>
+                </button>
+
+            </div>
+
+            {/* Render for mobile screens */}
+            <div className=" w-screen h-auto -top-[15px]  bg-black flex items-center justify-end z-50 md:hidden">
+                <div className="bg-black w-full h-24 absolute md:hidden"></div>
+                <div className="z-30">
+                    <img
+                        src={CodeHubLogo}
+                        className="logo absolute  left-2  logo hover:cursor-pointer w-auto h-10 "
+                        onClick={handleLogoClick}
+                    ></img>
+                </div>
+                <div>
+                    <HamburgerMenu />
                 </div>
             </div>
-            {/* ---------------------END---------------------- */}
-
-            {/* -----------------HTML FOR MOBILE/TABLET EXPERIENCE--------------- */}
-            <div id='navBar2Main'>
-                <div>
-                    <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/login")} id='navBar21Main'>
-                    {login ? "Logout" : "Login"} 
-                    </button>
-                </div>
-                <div id='navBar22Main'>
-                    <img id='navBarLogo1Main' src={CodeHubSingleLine} alt="Code Hub" />
-                    <img id='navBarLogo2Main' src={CodeHubLogo} alt="Code Hub" />
-                </div>
-                <div id="navigation">
-                    <button id='navBar23Main' onClick={() => onClickMenu()}>
-                        Explore
-                    </button>
-                    <ul className="navItemsMain" id="navItemsMain" onClick={() => onClickMenu()}>
-                        <div id='navCloseMain'>
-                            <div id='navCloseMain' className='gg-close'></div>
-                        </div>
-                        <li onClick={() => scroll("welcomeMain")}>Home</li>
-                        <li onClick={() => scroll("aboutUsMain")} >About Us</li>
-                        {/* <li onClick={() => scroll("teamsMain")}>Teams</li> */}
-                        <li onClick={() => scroll("motiveMain")}>Motive</li>
-                        {/* <li onClick={() => scroll("achievementsMain")}>Achievments</li> */}
-                        <li onClick={() => scroll("ourEventsMain")}>Events</li>
-                        <li onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/notice-board")}>Notice Board</li>
-                    </ul>
-                </div>
-            </div >
-            {/* ---------------------END---------------------- */}
         </>
-    )
+    );
 }
+
+export default Navbar;

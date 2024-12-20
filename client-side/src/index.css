@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,52 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.toast-success {
+  border: 1px solid #108126;
+  padding: 12px;
+  margin-top: 50px;
+  color: white;
+  /* Set text color to white */
+  background: linear-gradient(90deg, #23C43F 0%, #108126 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.toast-error {
+  border: 1px solid #BE1E10;
+  padding: 12px;
+  margin-top: 50px;
+  color: white;
+  /* Set text color to white */
+  background: linear-gradient(90deg, #F44D25 0%, #BE1E10 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.toast-blue {
+  padding: 12px;
+  margin-top: 50px;
+  color: white;
+  /* Set text color to white */
+  background: linear-gradient(90deg, #74C1FE 0%, #075FA6 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.toast-yellow {
+  border: 1px solid #EA730D;
+  padding: 12px;
+  margin-top: 50px;
+  color: white;
+  /* Set text color to white */
+  background: linear-gradient(90deg, #FBBD28 0%, #EA730D 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
 }

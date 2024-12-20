@@ -1,171 +1,155 @@
+import React, { useState } from 'react';
+import { cn } from "../../lib/utils";
+import { BackgroundBeamsWithCollision } from "../../components/ui/background_beams_with_collision";
+import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { login } from "../../redux/slices/authSlice"
+import { useDispatch, useSelector } from 'react-redux';
+import toast, { Toaster } from "react-hot-toast"
 
-// import React, { useState, useContext } from 'react'
-
-// import axios from "axios";
-// import { loginContext } from '../../loginContext';
-// import "./LoginPage.css"
-// import image from "./Assets/Logos/CodeHubLarge.png"
-// import { useNavigate, useParams } from 'react-router-dom';
-
-
-
-// export default function LoginPage() {
-//     const navigate = useNavigate()
-//     const [Message, setMessage] = useState();
-//     const [LogIn, setLogIn] = useState("Log In");
-
-
-//     //USER-LOGIN INFO
-//     const { login, setLogin, userCfID, setUserCfID } = useContext(loginContext)
-
-//     const [values, setValues] = useState({ cfID: "", password: "" });
-
-
-//     const handleSubmit = async (event) => {
-//         setLogIn("Loggin In");
-//         if (handleValidation()) {
-//             try {
-
-//                 console.log(values);
-
-//                 const { password, cfID } = values;
-
-//                 const { data } = await axios.post("http://localhost:8000/login", { cfID, password }, { withCredentials: true });
-//                 if (data.status === false) {
-//                     console.log(data.msg);
-//                     setMessage(data.msg);
-//                 }
-//                 else if (data.status === true) {
-//                     console.log(data);
-//                     localStorage.setItem(process.env.CODETOGETHER_APP_LOCALHOST_KEY, JSON.stringify(data.data));
-//                     console.log("success");
-//                     setLogin(true)
-//                     setUserCfID(cfID)
-//                     navigate(`/user-home/${values.cfID}`)
-//                 }
-
-//             } catch (error) {
-//                 setMessage("Error : ", (error === "" ? "unkown" : error));
-//             }
-//         }
-//     };
-
-//     const handleValidation = () => {
-//         const { password, cfID } = values;
-//         if (password === "" || cfID === "") { setMessage("cfID and password required"); return false; }
-//         return true;
-//     };
-
-//     const handleChange = (event) => { setValues({ ...values, [event.target.name]: event.target.value }) };
-
-//     return (
-//         <>
-//             <div id="loginPageMain1">
-//                 <div id="loginPageMain2">
-//                     <div className="codehub-uppercase-gradient" onClick={() => navigate("/")}>
-//                         CODEHUB
-//                     </div>
-//                     {/* <img id='loginMainPageTitle' src={image} alt="" onClick={()=>navigate("/")}/> */}
-//                     <div id='loginForm'>
-//                         <div style={{ color: 'darkred' }}>{Message}</div>
-//                         <input id="loginFormcfID" type="text" placeholder="CodeForces ID" name="cfID" onChange={(e) => handleChange(e)} min="3" autoComplete="off" />
-//                         <input id="loginFormPassword" type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} autoComplete="off" />
-//                         <button id="loginFormButton" onClick={() => handleSubmit()}>{LogIn}</button>
-//                     </div>
-//                 </div>
-//             </div>
-
-//         </>
-//     )
-// }
-
-
-
-//new component
-
-
-import React, { useState, useContext } from 'react';
-import axios from "axios";
-import { loginContext } from '../../loginContext';
-import "./LoginPage.css";
-import { useNavigate } from 'react-router-dom';
-
-export default function LoginPage() {
+export function Login() {
   const navigate = useNavigate();
-  const [Message, setMessage] = useState();
-  const [LogIn, setLogIn] = useState("Log In");
 
-  // USER-LOGIN INFO
-  const { login, setLogin, userCfID, setUserCfID } = useContext(loginContext);
-  const [values, setValues] = useState({ cfID: "", password: "" });
+  const dispatch = useDispatch();
+  const {loading, error } = useSelector((state) => state.auth);
 
-  const handleSubmit = async (event) => {
-    setLogIn("Logging In");
-    if (handleValidation()) {
-      try {
-        const { password, cfID } = values;
-        console.log( "server path: " + process.env.REACT_APP_SERVER_PATH);
-        const { data } = await axios.post(process.env.REACT_APP_SERVER_PATH + "/login", { cfID, password }, { withCredentials: true });
-        if (data.status === false) {
-          setMessage(data.msg);
-        } else if (data.status === true) {
-          localStorage.setItem(process.env.CODETOGETHER_APP_LOCALHOST_KEY, JSON.stringify(data.data));
-          setLogin(true);
-          setUserCfID(cfID);
-          navigate(`/user-home/${values.cfID}`);
-        }
-      } catch (error) {
-        setMessage("Error: " + (error === "" ? "unknown" : error));
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: "" });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.password.trim()) newErrors.password = "Password is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email format";
+    return newErrors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    // Dispatch Login Action    
+    const resultAction = await dispatch(login(formData));
+
+    // Handle Redux State Update
+    if (login.fulfilled.match(resultAction)) {
+      toast.success("Login successful", {
+        duration: 2000,
+        className: "toast-success"
+      });
+      navigate(`/dashBoard`);
+    } else {
+      toast.error(error || "Error Occured! Please Try Again", {
+        duration: 2000,
+        className: "toast-error"
       }
+      )
     }
-  };
-
-  const handleValidation = () => {
-    const { password, cfID } = values;
-    if (password === "" || cfID === "") {
-      setMessage("cfID and password required");
-      return false;
-    }
-    return true;
-  };
-
-  const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   return (
-    <div id="loginPageMain1">
-      <div id="loginPageMain2">
-        <div
-          className="codehub-uppercase-gradient"
-        >
-          LOGIN
+    <BackgroundBeamsWithCollision>
+      <div className="w-screen h-screen flex justify-center items-center text-white md:px-0 px-5">
+        <div className="max-w-md w-full border-[#3E3E8E] mx-auto rounded-lg p-6 shadow-2xl border">
+          {/* Header */}
+          <h1 className="text-3xl md:text-4xl font-bold text-center text-[#D1D1FF] mb-6">
+            Login to your account
+          </h1>
+
+          <form onSubmit={handleSubmit}>
+            {/* Email */}
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-sm md:text-base font-semibold text-[#C5C5FF] mb-2"
+              >
+                Email
+              </label>
+              <input
+                name="email"
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your email address"
+                className={cn(
+                  "w-full p-2 md:p-3 rounded border focus:outline-none focus:border-blue-400 bg-[#121232] text-gray-300 placeholder-gray-500",
+                  errors.email && "border-red-500"
+                )}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs">{errors.email}</p>
+              )}
+            </div>
+
+            {/* Password */}
+            <div className="mb-6">
+              <label
+                htmlFor="password"
+                className="block text-sm md:text-base font-semibold text-[#C5C5FF] mb-2"
+              >
+                Password
+              </label>
+              <input
+                name="password"
+                id="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="****************"
+                className={cn(
+                  "w-full p-2 md:p-3 rounded border focus:outline-none focus:border-blue-400 bg-[#121232] text-gray-300 placeholder-gray-500",
+                  errors.password && "border-red-500"
+                )}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-xs">{errors.password}</p>
+              )}
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 md:py-3 rounded focus:outline-none transition duration-200"
+                disabled={loading}
+              >
+                {!loading && "Sign In"}
+                {loading && "Signing In..."}
+              </button>
+            </div>
+          </form>
+
+          {/* Register Link */}
+          <p className="mt-4 text-center text-[#C5C5FF]">
+            Don't have an account?{" "}
+            <Link to="/signUp" className="text-blue-400 hover:text-blue-500">
+              Sign Up
+            </Link>
+          </p>
         </div>
-        <div id='loginForm'>
-          <div style={{ color: 'darkred' }}>{Message}</div>
-          <input
-            id="loginFormcfID"
-            type="text"
-            placeholder="CodeForces ID"
-            name="cfID"
-            onChange={(e) => handleChange(e)}
-            min="3"
-            autoComplete="off"
-          />
-          <input
-            id="loginFormPassword"
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={(e) => handleChange(e)}
-            autoComplete="off"
-          />
-          <button id="loginFormButton" onClick={() => handleSubmit()}>
-            {LogIn}
-          </button>
-        </div>
+        <Toaster />
       </div>
-    </div>
+    </BackgroundBeamsWithCollision>
   );
 }
 
+export default Login;

@@ -1,7 +1,7 @@
 import React, { useState,useContext } from 'react'
 import "./NavBar.css";
-import CodeHubSingleLine from "./Assets/Logos/CodeHubLarge.png";
-import CodeHubLogo from "./Assets/Logos/CodeHubSmall.png";
+import CodeTogetherSingleLine from "./Assets/Logos/CodeHubLarge.png";
+import CodeTogetherLogo from "./Assets/Logos/CodeTogetherLogo.png";
 import { useNavigate } from 'react-router-dom';
 import { loginContext } from '../../loginContext';
 
@@ -41,7 +41,7 @@ export default function NavBarSecond() {
             {/* --------------HTML FOR DESKTOP EXPERIENCE---------------- */}
             <div id='navBar1Main'>
                 <div id='navBar11Main'>
-                    <img onClick={() => navigate("/")} src={CodeHubSingleLine} alt="Code Hub" />
+                    <img onClick={() => navigate("/")} src={CodeTogetherSingleLine} alt="Code Together" />
                 </div>
                 <div id='navBar12Main'>
                    {login && <><button onClick={() =>{navigate(process.env.REACT_APP_BASE_URL + `/user-home/${userCfID}`)}} className='navBar121Main'>
@@ -71,8 +71,8 @@ export default function NavBarSecond() {
                     </button>
                 </div>
                 <div id='navBar22Main'>
-                    <img id='navBarLogo1Main' src={CodeHubSingleLine} alt="Code Hub" />
-                    <img id='navBarLogo2Main' src={CodeHubLogo} alt="Code Hub" />
+                    <img id='navBarLogo1Main' src={CodeTogetherSingleLine} alt="Code Together" />
+                    <img id='navBarLogo2Main' src={CodeTogetherLogo} alt="Code Together" />
                 </div>
                 {login && <div id="navigation">
                     <button id='navBar23Main' onClick={() => onClickMenu()}>

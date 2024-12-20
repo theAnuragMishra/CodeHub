@@ -1,20 +1,13 @@
 import React from 'react'
-import NavBar from '../../components/NavBar/NavBar'
 import Welcome from './Welcome/Welcome'
 import "./LandingPage.css"
-// import TeamMember from '../Team/TeamMember'
 import MotiveAchievements from './MotiveAchievements/MotiveAchievements'
 import OurEvents from './OurEvents/OurEvents'
-import QuickLinkAboutUs from './QuickLinksAboutUs/QuickLinkAboutUs'
-import ContactUs from './ContactUs/ContactUs'
+import Footer from "../../components/Footer/Footer"
 
 export default function LandingPage() {
     return (
-        <>
-            {/*  -----------------NAVBAR SECTION-------------------  */}
-            <div id='navBarLandingPageContainer'>
-                <NavBar />
-            </div>
+        <div className='bg-black h-auto'>
             {/* ---------------------END---------------------- */}
             {/*  -----------------WELCOME SECTION-------------------  */}
             <div id='welcomeLandingPageContainer'>
@@ -22,9 +15,9 @@ export default function LandingPage() {
             </div>
             {/* ---------------------END---------------------- */}
             {/*  -----------------QUICKLINKABOUTUS SECTION-------------------  */}
-            <div id='quickLinkAboutUsLandingPageContainer'>
+            {/* <div id='quickLinkAboutUsLandingPageContainer'>
                 <QuickLinkAboutUs />
-            </div>
+            </div> */}
             {/* ---------------------END---------------------- */}
             {/*  -----------------TEAMS SECTION-------------------  */}
             {/* <div id='teamsContainer'>
@@ -41,11 +34,8 @@ export default function LandingPage() {
                 <OurEvents />
             </div>
             {/* ---------------------END---------------------- */}
-            {/*  -----------------CONTACTUS SECTION-------------------  */}
-            <div id='contactUsContainer'>
-                <ContactUs />
-            </div>
+            <Footer />
             {/* ---------------------END---------------------- */}
-        </>
+        </div>
     )
 }
