@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRef } from 'react';
 import "./OurEvents.css";
-import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BackgroundGradient } from '../../../components/ui/backgroundGradient';
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
@@ -21,15 +21,15 @@ export default function OurEvents() {
         eventName: "Insomnia",
         summary: "An ACM-ICPC styled team based competitive programming contest organised by Motilal Nehru National Institute of Technology Annually in its Technical fest Avhiskar",
         registrationStatus: false
-    },{
+    }, {
         eventName: "Code Of The Day",
         summary: "An ACM-ICPC styled 7-days long solo competitive programming contest organised by Motilal Nehru National Institute of Technology Annually in its Technical fest Avhiskar",
         registrationStatus: false,
-    },{
+    }, {
         eventName: "Hack-36",
         summary: "A 36 hours long Hackathon organised Annually by Motilal Nehru National Institute of Technology",
         registrationStatus: false
-    },{
+    }, {
         eventName: "Code Sangam",
         summary: "A unified blend of development events based on all known tech stacks organised annually by Motilal Nehru National Institute of Technology",
         registrationStatus: false
@@ -37,33 +37,35 @@ export default function OurEvents() {
 
 
     return (
-        <div id='ourEventsMain'>
-            <div id='ourEventsTitle'>
+        <div className="my-20 ">
+            <div className="text-center text-3xl  md:text-5xl font-bold text-yellow-600 mb-20">
                 Our Events
             </div>
-            <div id='ourEventsContent' ref={EventContainer}>
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-10 " ref={EventContainer}>
                 {eventsData.map((event) => {
                     return (
-                        <div key={uuidv4()} className="eventBoxMain">
-                            <div className='eventBoxContentMain'>
-                                <div className='eventBoxEventName'>{event.eventName}</div>
-                                <div className='eventBoxEventSummary'>{event.summary}</div>
-                                {
-                                    (event.registrationStatus)
-                                        ?
-                                        <>
-                                            <div onClick={() => navigate("/demoLink")} className='eventBoxRegistrationOpen'>
-                                                Register Now
-                                            </div>
-                                        </>
-                                        :
-                                        <>
-                                            <div className='eventBoxRegistrationClosed'>
-                                                Registration Closed
-                                            </div>
-                                        </>
-                                }
-                            </div>
+                        <div className='w-[20rem] '>
+                            <BackgroundGradient>
+                                <div className='bg-gray-900 flex flex-col gap-y-5 rounded-3xl p-5'>
+                                    <h3 className='text-white text-2xl font-medium'>{event.eventName}</h3>
+                                    <p className='text-slate-400 text-lg'>{event.summary}</p>
+                                    {
+                                        (event.registrationStatus)
+                                            ?
+                                            <>
+                                                <div onClick={() => navigate("/demoLink")} className='eventBoxRegistrationOpen'>
+                                                    Register Now
+                                                </div>
+                                            </>
+                                            :
+                                            <>
+                                                <div className='eventBoxRegistrationClosed'>
+                                                    Registration Closed
+                                                </div>
+                                            </>
+                                    }
+                                </div>
+                            </BackgroundGradient>
                         </div>
                     );
                 })}
@@ -71,3 +73,4 @@ export default function OurEvents() {
         </div>
     )
 }
+
