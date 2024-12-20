@@ -169,9 +169,9 @@ export default function UserHome() {
             setPageHtml(
                 <>
                 <div className='background-pink-blue'>
-                    <div className='navBarContainer'>
+                    {/* <div className='navBarContainer'>
                         <NavBarSecond />
-                    </div>
+                    </div> */}
                     <NavSpace />
                     <div className='UserHomeOuterContainer'>
                         <div className='UserHomeInnerContainer'>
@@ -202,9 +202,9 @@ export default function UserHome() {
         } catch (error) {
             setPageHtml(
                 <>
-                    <div id='navBarLandingPageContainer'>
+                    {/* <div id='navBarLandingPageContainer'>
                         <NavBarSecond />
-                    </div>
+                    </div> */}
                     <NavSpace />
                     <div className="background-pink-blue" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Alert heading={"Couldn't fetch data"} body={"Check your internet connection and try again.."} />

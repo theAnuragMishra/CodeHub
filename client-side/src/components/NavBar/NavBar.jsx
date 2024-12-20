@@ -2,12 +2,15 @@
 import { useNavigate } from "react-router-dom";
 import CodeHubLogo from "./Assets/Logos/CodeHubSmall.png";
 import HamburgerMenu from "./HamburgerMenu";
+import { useSelector } from "react-redux";
 // import { Toaster } from "react-hot-toast";
 // import logo from "../../assets/general/logo.webp";
 
 function Navbar() {
+    const auth = useSelector(state => state.auth.user);
     const navigate = useNavigate();
 
+    console.log(auth);
     const handleLogoClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -70,15 +73,24 @@ function Navbar() {
                     </h2>
                 </div>
 
-
-                <button
-                    onClick={() => {
-                        navigate("/login");
-                    }}
-                    className="auth rounded-lg w-[11vw] bg-[#008CFF] lg:w-[7.1vw] h-[47px] tracking-wider text-white items-center justify-center font-semibold font-bebas hover:text-primary hover:bg-accent transition-all duration-500"
-                >
-                    <h1 className="lg:text-[1.3vw] md:text-[1.5vw] ">Login</h1>
-                </button>
+                {auth ?
+                    <button
+                        onClick={() => {
+                            navigate("/dashboard");
+                        }}
+                        className="auth rounded-lg w-[11vw] bg-[#008CFF] lg:w-[7.1vw] h-[47px] tracking-wider text-white items-center justify-center font-semibold font-bebas hover:text-primary hover:bg-accent transition-all duration-500"
+                    >
+                        <h1 className="lg:text-[1.3vw] md:text-[1.5vw] ">Profile</h1>
+                    </button> :
+                    <button
+                        onClick={() => {
+                            navigate("/login");
+                        }}
+                        className="auth rounded-lg w-[11vw] bg-[#008CFF] lg:w-[7.1vw] h-[47px] tracking-wider text-white items-center justify-center font-semibold font-bebas hover:text-primary hover:bg-accent transition-all duration-500"
+                    >
+                        <h1 className="lg:text-[1.3vw] md:text-[1.5vw] ">Login</h1>
+                    </button>
+                }
 
             </div>
 
