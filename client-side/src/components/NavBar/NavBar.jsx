@@ -10,7 +10,7 @@ function Navbar() {
     const auth = useSelector(state => state.auth.user);
     const navigate = useNavigate();
 
-    console.log(auth);
+    // console.log(auth);
     const handleLogoClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -21,7 +21,7 @@ function Navbar() {
     return (
         <>
             {/* Render for larger screens */}
-            <div className="w-[100vw] bg-black  custom1980:h-[92px] md:h-[60px] px-8 py-2 fixed bg-scheduleLargeText items-center justify-between z-50 md:flex hidden">
+            <div className="w-[100vw] bg-primary  custom1980:h-[92px] md:h-[60px] px-8 py-2 fixed bg-scheduleLargeText items-center justify-between z-50 md:flex hidden">
                 <img
                     src={CodeHubLogo}
                     className="logo hover:cursor-pointer w-auto h-10 object-contain bg-transparent"
@@ -95,8 +95,8 @@ function Navbar() {
             </div>
 
             {/* Render for mobile screens */}
-            <div className=" w-screen h-auto -top-[15px]  bg-black flex items-center justify-end z-50 md:hidden">
-                <div className="bg-black w-full h-24 absolute md:hidden"></div>
+            <div className=" w-screen h-auto -top-[15px]  flex items-center justify-end z-50 md:hidden">
+                <div className="bg-primary w-full h-24 absolute md:hidden"></div>
                 <div className="z-30">
                     <img
                         src={CodeHubLogo}
