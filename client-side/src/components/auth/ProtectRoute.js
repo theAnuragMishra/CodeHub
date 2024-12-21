@@ -7,7 +7,7 @@ import Spinner from '../Spinner/Spinner';
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading, error } = useSelector((state) => state.auth);
-    const [initializing, setInitializing] = useState(user ? false : true);
+    const [initializing, setInitializing] = useState(true);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const ProtectedRoute = ({ children }) => {
             }
         }
         check();
-    }, [dispatch, loading]);
+    }, []);
 
     if (initializing) {
         return (

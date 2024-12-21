@@ -1,5 +1,6 @@
 const { educationCategories, videos, leaderboard, contactUs, noticeboard, register } = require("../controllers/clientControllers");
-const controller = require("../controllers/Client/controller")
+const controller = require("../controllers/Client/controller");
+const verifyCookie = require("../utils/auth/verifyCookie");
 
 const router = require("express").Router();
 
@@ -15,4 +16,5 @@ router.post("/requestCfVerification", controller.generateCfVerificationRequestTo
 router.post("/verifyCfID", controller.verifyCfID);
 router.get("/check/session", controller.checkSession);
 router.post("/feedback", controller.userFeedback);
+router.post("/logout", verifyCookie, controller.logout);
 module.exports = router;

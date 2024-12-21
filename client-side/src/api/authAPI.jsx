@@ -163,13 +163,39 @@ const checkSession = async () => {
     }
 }
 
+const handleLogout= async() => {
+    try {
+        const response= await axios.post(`${server_base_url}/logout`, {}, {
+             withCredentials: true,
+        });
+
+        if(response.data.success){
+            return{
+                success: true,
+                message: "Logout successful !"
+            };
+        }
+        else{
+            throw new Error(response.data.message || "Logout failed");
+        }
+    } catch (error) {
+         console.error("Logout error: ", error.message);
+         return{
+            success: false,
+            message: error.response?.data?.message || error.message || "An unknown error occurred"
+         };
+    }
+}
+
+
 const authAPI = {
     handleLogin,
     handleRegister,
     handleRequestCfVerification,
     handleVerifyCfID,
     handleVerifyEmail,
-    checkSession
+    checkSession,
+    handleLogout
 }
 
 export default authAPI;

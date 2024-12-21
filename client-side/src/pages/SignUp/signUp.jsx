@@ -182,7 +182,7 @@ function Signup() {
                                 disabled={loading}
                             >
                                 {!loading && "Sign Up"}
-                                {loading && "Singning Up..."}
+                                {loading && "Signing Up..."}
                             </button>
                         </div>
                     </form>
