@@ -12,8 +12,8 @@ const ProtectedRoute = ({ children }) => {
 
     useEffect(() => {
         async function check() {
-            if (!user && !loading) {
-                const resultAction = await dispatch(checkAuth());
+            if (!loading) {
+                await dispatch(checkAuth());
                 setInitializing(false);
                 // if (checkAuth.rejected.match(resultAction)) {
                 //     toast.error(error, {
@@ -27,7 +27,7 @@ const ProtectedRoute = ({ children }) => {
             }
         }
         check();
-    }, [dispatch, user]);
+    }, [dispatch, loading]);
 
     if (initializing) {
         return (
