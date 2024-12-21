@@ -65,7 +65,20 @@ export const verifyEmail = createAsyncThunk('auth/verifyEmail', async ({ email }
     }
 })
 
-
+//Logout
+export const logout= createAsyncThunk('auth/logout', async(_, {rejectWithValue})=>{
+    try {
+       const response= await authAPI.handleLogout();
+       if(response.success) {
+           return response.message;
+       }
+       else{
+           return rejectWithValue(response.message || "Logout Failed");
+       }
+    } catch (error) {
+       return rejectWithValue(error.message || "An error occured during logout");
+    }
+});
 
 
 const authSlice = createSlice({
@@ -119,6 +132,20 @@ const authSlice = createSlice({
             .addCase(signUp.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+
+            //Logout
+            .addCase(logout.pending, (state) => {
+                state.loading= true;
+                state.error= null;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.loading= false;
+                state.user= null;
+            })
+            .addCase(logout.rejected, (state, action) => {
+                state.loading= false;
+                state.error= action.payload;
             })
 
     }
