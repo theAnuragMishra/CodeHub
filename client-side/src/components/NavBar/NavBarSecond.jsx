@@ -1,17 +1,18 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import "./NavBar.css";
 import CodeTogetherSingleLine from "./Assets/Logos/CodeHubLarge.png";
 import CodeTogetherLogo from "./Assets/Logos/CodeTogetherLogo.png";
 import { useNavigate } from 'react-router-dom';
-import { loginContext } from '../../loginContext';
 
 
 export default function NavBarSecond() {
     const navigate = useNavigate();
 
-      //USER-LOGIN INFO
-      const {login,userCfID} = useContext(loginContext);
-      console.log(login)  
+    //USER-LOGIN INFO
+    //   const {login,userCfID} = useContext(loginContext);
+    //   console.log(login)  
+    const login = false;
+    const userCfID = "";
 
     //FUNCTION FOR MENU
     const onClickMenu = () => {
@@ -44,20 +45,20 @@ export default function NavBarSecond() {
                     <img onClick={() => navigate("/")} src={CodeTogetherSingleLine} alt="Code Together" />
                 </div>
                 <div id='navBar12Main'>
-                   {login && <><button onClick={() =>{navigate(process.env.REACT_APP_BASE_URL + `/user-home/${userCfID}`)}} className='navBar121Main'>
+                    {login && <><button onClick={() => { navigate(process.env.REACT_APP_BASE_URL + `/user-home/${userCfID}`) }} className='navBar121Main'>
                         Profile
                     </button>
-                    <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/leader-board")} className='navBar121Main'>
-                        Leader Board
-                    </button>
-                    <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/education")} className='navBar121Main'>
-                        Education
-                    </button></>}
+                        <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/leader-board")} className='navBar121Main'>
+                            Leader Board
+                        </button>
+                        <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/education")} className='navBar121Main'>
+                            Education
+                        </button></>}
                     <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/notice-board")} className='navBar121Main'>
                         Notice Board
                     </button>
                     <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/login")} id='navBar122Main'>
-                       {login ? "Logout" : "Login"} 
+                        {login ? "Logout" : "Login"}
                     </button>
                 </div>
             </div>
@@ -67,7 +68,7 @@ export default function NavBarSecond() {
             <div id='navBar2Main'>
                 <div>
                     <button onClick={() => navigate(process.env.REACT_APP_BASE_URL + "/login")} id='navBar21Main'>
-                    {login ? "Logout" : "Login"} 
+                        {login ? "Logout" : "Login"}
                     </button>
                 </div>
                 <div id='navBar22Main'>
