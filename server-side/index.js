@@ -1,51 +1,78 @@
 const express = require("express");
-//const cors = require("cors");
-const mongoose = require("mongoose");
 const clientRoutes = require("./routes/clientRoutes");
-const adminRoutes = require("./routes/adminRoutes");
+// const adminRoutes = require("./routes/adminRoutes");
+const connectDB = require("./db/connect");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const app = express();
+const morgan = require("morgan");
+const errorHandler = require("./ErrorHandlers/error_handler");
+const cors = require("cors");
 require("dotenv").config();
 
-//app.use(cors());
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("📋[server-log]: :method :url :status :response-time ms"));
 app.use(cookieParser());
-app.use(session({
-  secret: "secret",
-  resave: false,
-  saveUninitialized: true
-}));
-app.use(function (req, res, next) {
-    const origin = req.headers.origin;
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
-    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Authorization, authorization, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();  // Respond with 200 OK for preflight
-    }
-    next();
-});
 
-mongoose.set('strictQuery', false);
-mongoose
-    .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("DB Connetion Successfull");
-    })
-    .catch((err) => {
-        console.log(err.message);
-    });
+// Allowed origins for CORS
+const allowedOrigins = [
+    "https://computercodingclub.in",
+    "http://localhost:3000",
+];
 
-app.use("/admin", adminRoutes);
+app.use(
+    cors({
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true,
+    })
+);
+
+app.use(
+    session({
+        secret: "secret",
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "none",
+        },
+    })
+);
+
+// Connect to the database
+connectDB();
+
+// Routes
+// app.use("/admin", adminRoutes);
 app.use("/", clientRoutes);
-// app.use(process.env.REACT_APP_BASE_URL + "/", clientRoutes);
 
+// Error handler (last middleware)
+app.use(errorHandler);
+
+// Start the server
 const server = app.listen(process.env.PORT, () =>
     console.log(`Server started on port ${process.env.PORT}`)
 );
+
+// Handle uncaught exceptions
+process.on("uncaughtException", (err) => {
+    console.error(`Error: ${err.message}`);
+    console.error("Shutting down due to uncaught exception");
+    server.close(() => process.exit(1));
+});
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err) => {
+    console.error(`Error: ${err.message}`);
+    console.error("Shutting down due to unhandled promise rejection");
+    server.close(() => process.exit(1));
+});
