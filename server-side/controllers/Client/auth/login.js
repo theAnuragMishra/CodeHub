@@ -26,7 +26,7 @@ const Login = AsyncErrorHandler(async (req, res, next) => {
     }
 
     const { email, password } = req.body;
-
+    console.log("Login initiated")
     try {
         // Check if user exists
         const user = await Users.findOne({ email });
@@ -90,7 +90,7 @@ const Login = AsyncErrorHandler(async (req, res, next) => {
         res.cookie("jwt", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "none",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             maxAge: 24 * 60 * 60 * 1000, // 1 day
         });
 
