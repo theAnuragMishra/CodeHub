@@ -18,20 +18,21 @@ import NavBarSecond from '../../components/NavBar/NavBarSecond';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 export default function UserHome() {
 
     // Declared Data members
-
+    const {user}= useSelector((state)=> state.auth);
     const [PageHtml, setPageHtml] = useState(<>
         <NavSpace />
         <Spinner />
     </>);
 
-    const params = useParams()
+    // const params = useParams()
 
-    const cfID = params.id;
+    const cfID = user ? user.cfID : null;
     console.log(cfID)
 
     let userData = { status: "", data: {} };
@@ -180,7 +181,7 @@ export default function UserHome() {
                                 <RatingCard name={userDetail.name} rank={userData.data.rank} />
                                 <ProfileImg image={userData.data.titlePhoto} />
                             </div>
-                            <UserDetail userdetail={userDetail} />
+                            <UserDetail userDetail={userDetail} />
                             <div className='BottomUserHome background-white-trans'>
                                 <ContestRating ratingdata={userRating.data} />
                                 <PerformanceIndex ratingdata={userRating.data} />
