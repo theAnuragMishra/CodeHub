@@ -26,7 +26,7 @@ const Login = AsyncErrorHandler(async (req, res, next) => {
     }
 
     const { email, password } = req.body;
-
+    console.log("Login initiated")
     try {
         // Check if user exists
         const user = await Users.findOne({ email });
@@ -65,17 +65,17 @@ const Login = AsyncErrorHandler(async (req, res, next) => {
             const text = utils.createVerificationEmail({ verificationCode: token.code, subject });
 
             //Send Email
-            await sendEmail(user.email, subject,text);
+            await sendEmail(user.email, subject, text);
 
             return res.status(401).json({
                 success: false, message: "Email not verified. Verification email sent."
                 , isVerifiedEmail: false
             });
         }
-        
+
         // Handle session
         const cookieID = randomUUID();
-        
+
         const existingSession = await ClientSessions.findOne({ userId: user._id });
         if (existingSession) {
             await ClientSessions.deleteOne({ userId: user._id });
@@ -90,7 +90,7 @@ const Login = AsyncErrorHandler(async (req, res, next) => {
         res.cookie("jwt", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "Strict",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             maxAge: 24 * 60 * 60 * 1000, // 1 day
         });
 

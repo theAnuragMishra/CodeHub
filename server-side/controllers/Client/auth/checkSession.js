@@ -5,7 +5,7 @@ const User = require("../../../model/userModel")
 
 const checkSession = AsyncErrorHandler(async (req, res, next) => {
     // Extract token from user's cookie
-    const token = req.cookies.jwt;
+    const token = req.decoded;
     if (!token) {
         return res.status(401).json({ success: false, message: "Unauthorized access" });
     }

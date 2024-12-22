@@ -14,10 +14,8 @@ import ProblemDetails from './ProblemDetails/ProblemDetails';
 import Languages from './Graphs/Languages';
 import NavSpace from '../../components/NavSpace';
 import Spinner from '../../components/Spinner/Spinner';
-import NavBarSecond from '../../components/NavBar/NavBarSecond';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 

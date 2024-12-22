@@ -1,17 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "../redux/slices/authSlice";
+import Spinner from "../components/Spinner/Spinner"
 
 export function AuthWrapper({ children }) {
     const dispatch = useDispatch();
-    const authChecked = useRef(false);
+    const [authChecked, setAuthChecked] = useState(false);
 
     useEffect(() => {
-        if (!authChecked.current) {
-            dispatch(checkAuth());
-            authChecked.current = true;
+        async function checkSession() {
+            if (!authChecked.current) {
+                console.log("Checking");
+                await dispatch(checkAuth());
+                console.log("Checked")
+                setAuthChecked(true);
+            }
         }
-    }, [dispatch]);
+        checkSession();
+    }, []);
+
+    if (!authChecked) {
+        return <Spinner />
+    }
 
     return children;
 }

@@ -6,7 +6,7 @@ import Spinner from '../Spinner/Spinner';
 
 
 const ProtectedRoute = ({ children }) => {
-    const { user, loading, error } = useSelector((state) => state.auth);
+    const { user, loading } = useSelector((state) => state.auth);
     const [initializing, setInitializing] = useState(true);
     const dispatch = useDispatch();
 
@@ -15,12 +15,6 @@ const ProtectedRoute = ({ children }) => {
             if (!loading) {
                 await dispatch(checkAuth());
                 setInitializing(false);
-                // if (checkAuth.rejected.match(resultAction)) {
-                //     toast.error(error, {
-                //         duration: 2000,
-                //         className: "toast-error"
-                //     });
-                // }
             }
             else {
                 setInitializing(false);

@@ -6,7 +6,7 @@ import VideoLists from './pages/VideoLists/VideoLists';
 import Education from './pages/Education/Education';
 import NoticeBoard from "./pages/Noticeboard/Noticeboard"
 import Leaderboard from './pages/Leaderboard/Leaderboard';
-import DashBoard from './pages/UserHome/UserHome';
+import DashBoard from './pages/DashBoard/dashboard';
 import TeamMember from "./pages/Team/Team"
 import Signup from "./pages/SignUp/signUp"
 import VerifyEmail from "./pages/SignUp/verifyEmail"
