@@ -5,18 +5,18 @@ const User = require("../../../model/userModel")
 
 const checkSession = AsyncErrorHandler(async (req, res, next) => {
     // Extract token from user's cookie
-    const token = req.cookies.jwt;
+    const token = req.decoded;
+    
     if (!token) {
         return res.status(401).json({ success: false, message: "Unauthorized access" });
     }
 
     try {
         //Verify the JWT token
-        const decoded = jwt.verify(token, process.env.COOKIE_SECRET_KEY);
-        const userId = decoded.userId;
+        const userId = token.userId;
         const storedToken = await ClientSession.findOne({ userId });
-
         if (!storedToken) {
+            console.log("Not found")
             return res.status(401).json({ success: false, message: "Unauthorized access" });
         }
 

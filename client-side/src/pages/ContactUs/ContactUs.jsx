@@ -68,7 +68,7 @@ function ContactUs() {
   return (
     <>
       <BackgroundBeamsWithCollision>
-        <div className="mt-10 w-screen h-screen flex justify-center items-center text-white md:px-0 px-5">
+        <div className="md:mt-10 w-screen h-screen flex items-center text-white md:px-0 px-5">
           <div className="max-w-md w-full border-[#3E3E8E] mx-auto rounded-lg p-6 shadow-2xl border">
             {/* Header */}
             <h1 className="text-3xl md:text-4xl font-bold text-center text-[#D1D1FF] mb-6">

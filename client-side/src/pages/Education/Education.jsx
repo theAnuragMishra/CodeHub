@@ -8,6 +8,7 @@ import Alert from '../../components/Alert/Alert';
 import axios from 'axios';
 import NavBarSecond from '../../components/NavBar/NavBarSecond';
 import Footer from '../../components/Footer/Footer';
+import { useSelector } from 'react-redux';
 
 function EduSection(props) {
     const _id = props._id;
@@ -27,7 +28,7 @@ function EduSection(props) {
 export default function Education() {
     
     const navigate = useNavigate();
-
+    const {user}= useSelector((state)=> state.auth);
     const [PageHtml, setPageHtml] = useState(<>
         <NavSpace />
         <Spinner />
@@ -40,9 +41,8 @@ export default function Education() {
     const updatePageHtml = async () => {
 
         try {
-            console.log("user");
-            const user = await JSON.parse(localStorage.getItem(process.env.CODETOGETHER_APP_LOCALHOST_KEY));
-            const EducationAPIresponse = await axios.post(process.env.REACT_APP_SERVER_PATH + '/education', { cfID: user.cfID }, { withCredentials: true });
+            // const user = await JSON.parse(localStorage.getItem(process.env.CODETOGETHER_APP_LOCALHOST_KEY));
+            const EducationAPIresponse = await axios.post(process.env.REACT_APP_SERVER_BASE_URL + '/education', { cfID: user.cfID }, { withCredentials: true });
             const EducationInfo = EducationAPIresponse.data.data;
             const EducationComponent = EducationInfo.map((category, index) => <EduSection key={index} title={category.title} _id={category._id} redirectToVideos={redirectToVideos}/>)
 

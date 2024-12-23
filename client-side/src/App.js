@@ -6,7 +6,7 @@ import VideoLists from './pages/VideoLists/VideoLists';
 import Education from './pages/Education/Education';
 import NoticeBoard from "./pages/Noticeboard/Noticeboard"
 import Leaderboard from './pages/Leaderboard/Leaderboard';
-import DashBoard from './pages/UserHome/UserHome';
+import DashBoard from './pages/DashBoard/dashboard';
 import TeamMember from "./pages/Team/Team"
 import Signup from "./pages/SignUp/signUp"
 import VerifyEmail from "./pages/SignUp/verifyEmail"
@@ -39,6 +39,9 @@ export default function App() {
                     <Route path={"/leader-board"} element={<Leaderboard />} />
                     <Route path={"/team-member"} element={<TeamMember />} />
                     <Route path={"/contact-us"} element={<ContactUs />} />
+                    <Route path= {"/get-codeforces-profile/:id"} element= {<ProtectedRoute>
+                        <DashBoard />
+                    </ProtectedRoute>}/>
                 </Routes>
             </AuthWrapper>
         </BrowserRouter >
