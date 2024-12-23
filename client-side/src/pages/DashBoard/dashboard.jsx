@@ -17,6 +17,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 
 export default function UserHome() {
@@ -29,8 +30,11 @@ export default function UserHome() {
     </>);
 
     // const params = useParams()
-
-    const cfID = user ? user.cfID : null;
+    const {id}= useParams();
+    let cfID = user ? user.cfID : null;
+    if(id){
+        cfID=id;
+    }
     console.log(cfID)
 
     let userData = { status: "", data: {} };
@@ -63,10 +67,11 @@ export default function UserHome() {
             const userDataAPI = await axios.get("https://codeforces.com/api/user.info?handles=" + cfID);
             const userRatingAPI = await axios.get("https://codeforces.com/api/user.rating?handle=" + cfID);
             const userSubmissionsAPI = await axios.get("https://codeforces.com/api/user.status?handle=" + cfID);
+            console.log("Api calls done");
 
             userData.status = userDataAPI.data.status;
             userData.data = userDataAPI.data.result[0];
-
+            
             userRating.status = userRatingAPI.data.status;
             userRating.data = userRatingAPI.data.result;
 
@@ -75,7 +80,7 @@ export default function UserHome() {
 
             userLanguage.status = userSubmissionsAPI.data.status
 
-
+            console.log("user first name:", userData.data.firstName);
             if (userData.data.firstName === undefined && userData.data.lastName === undefined) {
                 userDetail.name = "Name not available"
             } else if (userData.data.firstName === undefined) {

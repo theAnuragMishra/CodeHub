@@ -5,14 +5,15 @@ import axios from 'axios';
 import NavSpace from '../../components/NavSpace';
 import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
-import NavBarSecond from '../../components/NavBar/NavBarSecond';
+// import NavBarSecond from '../../components/NavBar/NavBarSecond';
 import Footer from '../../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function LeaderUser(props) {
     const navigate = useNavigate()
     function handleUserClick(){
-        navigate(`/user-home/${props.name}`)
+        navigate(`/get-codeforces-profile/${props.name}`)
     }
     
     return (
@@ -36,6 +37,7 @@ function LeaderUser(props) {
 }
 
 export default function Leaderboard() {
+    const { user } = useSelector((state) => state.auth);
     const [PageHtml, setPageHtml] = useState(<>
         <NavSpace />
         <Spinner />
@@ -91,8 +93,8 @@ export default function Leaderboard() {
 
         try {
 
-            const user = await JSON.parse(localStorage.getItem(process.env.CODETOGETHER_APP_LOCALHOST_KEY));
-            const LeaderboardAPIresponse = await axios.post(process.env.SERVER_PATH + '/leaderboard', { cfID: user.cfID }, { withCredentials: true });
+            // const user = await JSON.parse(localStorage.getItem(process.env.CODETOGETHER_APP_LOCALHOST_KEY));
+            const LeaderboardAPIresponse = await axios.post(process.env.REACT_APP_SERVER_BASE_URL + '/leaderboard', { cfID: user.cfID }, { withCredentials: true });
             const userBoardInfo = LeaderboardAPIresponse.data.data;
             console.log(userBoardInfo)
             await SortUsersByRating(userBoardInfo)
@@ -102,9 +104,9 @@ export default function Leaderboard() {
             setPageHtml(<>
                 <div>
                     <div className="background-pink-blue">
-                        <div id='navBarLandingPageContainer'>
+                        {/* <div id='navBarLandingPageContainer'>
                             <NavBarSecond />
-                        </div>
+                        </div> */}
                         <NavSpace />
                         <div className='leader-heading'>Leaderboard</div>
                         <div>
@@ -117,9 +119,9 @@ export default function Leaderboard() {
         } catch (err) {
             setPageHtml(
                 <>
-                    <div id='navBarLandingPageContainer'>
+                    {/* <div id='navBarLandingPageContainer'>
                         <NavBarSecond />
-                    </div>
+                    </div> */}
                     <NavSpace />
                     <div className="background-pink-blue" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Alert heading={"Couldn't fetch data"} body={"Check your internet connection and try again.."} />

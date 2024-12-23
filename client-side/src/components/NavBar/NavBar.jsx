@@ -202,13 +202,25 @@ function Navbar() {
                         {dropdownOpen && (
                             <div className="absolute right-0 w-[11vw] bg-white text-black rounded-lg shadow-lg mt-2 z-50">
                                 <h1
-                                    className="hover:bg-blue-200 px-4 py-2 cursor-pointer transition-colors duration-300 hover:text-primary"
+                                    className="hover:bg-blue-200 px-2 py-2 cursor-pointer transition-colors duration-300 hover:text-primary"
                                     onClick={() => navigate("/dashboard")}
                                 >
                                     Dashboard
                                 </h1>
                                 <h1
-                                    className="hover:bg-red-200 px-4 py-2 cursor-pointer transition-colors duration-300 hover:text-red-500"
+                                    className="hover:bg-blue-200 px-2 py-2 cursor-pointer transition-colors duration-300 hover:text-primary"
+                                    onClick={() => navigate("/education")}
+                                >
+                                    Education
+                                </h1>
+                                <h1
+                                    className="hover:bg-blue-200 px-2 py-2 cursor-pointer transition-colors duration-300 hover:text-primary"
+                                    onClick={() => navigate("/leader-board")}
+                                >
+                                    Leaderboard
+                                </h1>
+                                <h1
+                                    className="hover:bg-red-200 px-2 py-2 cursor-pointer transition-colors duration-300 hover:text-red-500"
                                     onClick={handleLogout}
                                 >
                                     Logout
