@@ -39,6 +39,9 @@ export default function App() {
                     <Route path={"/leader-board"} element={<Leaderboard />} />
                     <Route path={"/team-member"} element={<TeamMember />} />
                     <Route path={"/contact-us"} element={<ContactUs />} />
+                    <Route path= {"/get-codeforces-profile/:id"} element= {<ProtectedRoute>
+                        <DashBoard />
+                    </ProtectedRoute>}/>
                 </Routes>
             </AuthWrapper>
         </BrowserRouter >

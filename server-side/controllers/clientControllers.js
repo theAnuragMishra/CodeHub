@@ -10,21 +10,22 @@ const bcrypt = require("bcrypt");
 
 module.exports.educationCategories = async (req, res, next) => {
     try {
-        const cookie = req.decoded;
-        const cfID = req.body.cfID;
-        const cookieID = cookie.cookieID;
-        const session = await ClientSessions.findOne({ cfID: cfID });
-        if (cookieID == session.cookieID) {
-            const educationCategories = await EducationCategories.find();
-            return res.json({ status: true, data: educationCategories });
-        }
-        else
-            return res.json({ status: false, msg: "Session expired" });
-    }
-    catch (ex) {
-        next(ex);
-    }
+        const { decoded, body: { cfID } } = req;
+        const { cookieID } = decoded;
 
+        const session = await ClientSessions.findOne({ cookieID });
+
+        if (!session || cookieID !== session.cookieID) {
+            return res.status(401).json({ status: false, msg: "Session expired or invalid" });
+        }
+        
+        const educationCategories = await EducationCategories.find();
+        
+        return res.json({ status: true, data: educationCategories });
+
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports.videos = async (req, res, next) => {
@@ -48,28 +49,18 @@ module.exports.videos = async (req, res, next) => {
 };
 module.exports.leaderboard = async (req, res, next) => {
     try {
-        let cookieID;
-        const cookie = req.cookies.jwt;
-        const cfID = req.body.cfID;
-        jwt.verify(
-            cookie,
-            process.env.COOKIE_SECRET_KEY,
-            (err, decoded) => {
-                if (err)
-                    return res.json({ status: false, msg: "Invalid cookieID" });
-                cookieID = decoded.cookieID;
-            }
-        );
-        const session = await ClientSessions.findOne({ cfID: cfID });
-        if (cookieID == session.cookieID) {
-            const cfID = await Users.find().select(["cfID"]);
-            return res.json({ status: true, data: cfID });
+        const {decoded}= req;
+        const {cookieID}= decoded;
+        const session = await ClientSessions.findOne({cookieID});
+        if (!session || cookieID !== session.cookieID) {
+            return res.status(401).json({ status: false, msg: "Session expired or invalid" });
         }
-        else
-            return res.json({ status: false, msg: "Session expired" });
+
+        const cfID = await Users.find().select(["cfID"]);
+        return res.json({ status: true, data: cfID });
     }
-    catch (ex) {
-        next(ex);
+    catch (error) {
+        next(error);
     }
 
 };
