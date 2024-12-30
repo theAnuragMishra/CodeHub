@@ -1,229 +1,96 @@
-// import React from 'react';
-// import { ResponsiveContainer, PieChart, Pie } from 'recharts';
-// import './Graphs.css';
-
-
-// export default function VerditcGraph(props) {
-//     const verdictData = [
-//         {
-//             "name": "Challenged",
-//             "value": props.verdictdata.CHALLENGED,
-//             "fill": "#9E00FF"
-//         },
-//         {
-//             "name": "Compilation error",
-//             "value": props.verdictdata.COMPILATION_ERROR,
-//             "fill": "#FF4A4A"
-//         },
-//         {
-//             "name": "Crashed",
-//             "value": props.verdictdata.CRASHED,
-//             "fill": "#005C90"
-//         },
-//         {
-//             "name": "Failed",
-//             "value": props.verdictdata.FAILED,
-//             "fill": "#630000"
-//         },
-//         {
-//             "name": "Idleness limit exceeded [ILE]",
-//             "value": props.verdictdata.IDLENESS_LIMIT_EXCEEDED,
-//             "fill": "#0078BC"
-//         },
-//         {
-//             "name": "Input preparation crashed",
-//             "value": props.verdictdata.INPUT_PREPARATION_CRASHED,
-//             "fill": "#003A5A"
-//         },
-//         {
-//             "name": "Memory limit exceeded [MLE]",
-//             "value": props.verdictdata.MEMORY_LIMIT_EXCEEDED,
-//             "fill": "#CA9D00"
-//         },
-//         {
-//             "name": "Accepted [AC]",
-//             "value": props.verdictdata.OK,
-//             "fill": "#478E00"
-//         },
-//         {
-//             "name": "Partial",
-//             "value": props.verdictdata.PARTIAL,
-//             "fill": "#355500"
-//         },
-//         {
-//             "name": "Presentation error",
-//             "value": props.verdictdata.PRESENTATION_ERROR,
-//             "fill": "#310063"
-//         },
-//         {
-//             "name": "Rejected",
-//             "value": props.verdictdata.REJECTED,
-//             "fill": "#FF7F57"
-//         },
-//         {
-//             "name": "Runtime error [RE]",
-//             "value": props.verdictdata.RUNTIME_ERROR,
-//             "fill": "#5C3700"
-//         },
-//         {
-//             "name": "Security violated",
-//             "value": props.verdictdata.SECURITY_VIOLATED,
-//             "fill": "#683E69"
-//         },
-//         {
-//             "name": "Skipped",
-//             "value": props.verdictdata.SKIPPED,
-//             "fill": "#2C2C2C"
-//         },
-//         {
-//             "name": "Testing",
-//             "value": props.verdictdata.TESTING,
-//             "fill": "#008B37"
-//         },
-//         {
-//             "name": "Time limit exceeded [TLE]",
-//             "value": props.verdictdata.TIME_LIMIT_EXCEEDED,
-//             "fill": "#AB7100"
-//         },
-//         {
-//             "name": "Wrong answer [WA]",
-//             "value": props.verdictdata.WRONG_ANSWER,
-//             "fill": "#FF0000"
-//         }
-//     ];
-//     return (
-//         <div style={{ marginBottom: '50px' }}>
-//             <h4 style={{ width: '100%', textAlign: 'center', color: 'black' }}>Submision verdicts</h4>
-//             <div className='VerdictContainer'>
-//                 <div style={{ width: '250px', minWidth: '250px' }}>
-//                     {verdictData.map((verdict, index) => < div className='VerdictLegendItems' key={index} style={{ color: verdict.fill }}> {verdict.name} : {verdict.value} </div>)}
-//                 </div>
-//                 <ResponsiveContainer width='100%' height='100%'>
-//                     <PieChart >
-//                         <Pie data={verdictData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={'100%'} fill="#82ca9d" />
-//                     </PieChart>
-//                 </ResponsiveContainer>
-//             </div>
-//         </div>
-//     )
-// }
-
-
-
 import React from 'react';
-import { ResponsiveContainer, PieChart, Pie , Tooltip} from 'recharts';
-import './Graphs.css';
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 
+export default function VerdictGraph({ verdictdata }) {
+  const verdictData = [
+    { name: 'Challenged', value: verdictdata.CHALLENGED, fill: '#845EC2' },
+    { name: 'Compilation Error', value: verdictdata.COMPILATION_ERROR, fill: '#FF6F91' },
+    { name: 'Crashed', value: verdictdata.CRASHED, fill: '#FFC75F' },
+    { name: 'Failed', value: verdictdata.FAILED, fill: '#D65DB1' },
+    { name: 'Idleness Limit Exceeded [ILE]', value: verdictdata.IDLENESS_LIMIT_EXCEEDED, fill: '#FF9671' },
+    { name: 'Input Preparation Crashed', value: verdictdata.INPUT_PREPARATION_CRASHED, fill: '#FFC75F' },
+    { name: 'Memory Limit Exceeded [MLE]', value: verdictdata.MEMORY_LIMIT_EXCEEDED, fill: '#F9F871' },
+    { name: 'Accepted [AC]', value: verdictdata.OK, fill: '#00C9A7' },
+    { name: 'Partial', value: verdictdata.PARTIAL, fill: '#008E9B' },
+    { name: 'Presentation Error', value: verdictdata.PRESENTATION_ERROR, fill: '#008F7A' },
+    { name: 'Rejected', value: verdictdata.REJECTED, fill: '#B39CD0' },
+    { name: 'Runtime Error [RE]', value: verdictdata.RUNTIME_ERROR, fill: '#6A0572' },
+    { name: 'Security Violated', value: verdictdata.SECURITY_VIOLATED, fill: '#FF5E78' },
+    { name: 'Skipped', value: verdictdata.SKIPPED, fill: '#6A1B4D' },
+    { name: 'Testing', value: verdictdata.TESTING, fill: '#FFC75F' },
+    { name: 'Time Limit Exceeded [TLE]', value: verdictdata.TIME_LIMIT_EXCEEDED, fill: '#FF9671' },
+    { name: 'Wrong Answer [WA]', value: verdictdata.WRONG_ANSWER, fill: '#FF4B5C' },
+  ];
 
-export default function VerditcGraph(props) {
-    const verdictData = [
-        {
-            "name": "Challenged",
-            "value": props.verdictdata.CHALLENGED,
-            "fill": "#9E00FF"
-        },
-        {
-            "name": "Compilation error",
-            "value": props.verdictdata.COMPILATION_ERROR,
-            "fill": "#FF4A4A"
-        },
-        {
-            "name": "Crashed",
-            "value": props.verdictdata.CRASHED,
-            "fill": "#005C90"
-        },
-        {
-            "name": "Failed",
-            "value": props.verdictdata.FAILED,
-            "fill": "#630000"
-        },
-        {
-            "name": "Idleness limit exceeded [ILE]",
-            "value": props.verdictdata.IDLENESS_LIMIT_EXCEEDED,
-            "fill": "#0078BC"
-        },
-        {
-            "name": "Input preparation crashed",
-            "value": props.verdictdata.INPUT_PREPARATION_CRASHED,
-            "fill": "#003A5A"
-        },
-        {
-            "name": "Memory limit exceeded [MLE]",
-            "value": props.verdictdata.MEMORY_LIMIT_EXCEEDED,
-            "fill": "#CA9D00"
-        },
-        {
-            "name": "Accepted [AC]",
-            "value": props.verdictdata.OK,
-            "fill": "#478E00"
-        },
-        {
-            "name": "Partial",
-            "value": props.verdictdata.PARTIAL,
-            "fill": "#355500"
-        },
-        {
-            "name": "Presentation error",
-            "value": props.verdictdata.PRESENTATION_ERROR,
-            "fill": "#310063"
-        },
-        {
-            "name": "Rejected",
-            "value": props.verdictdata.REJECTED,
-            "fill": "#FF7F57"
-        },
-        {
-            "name": "Runtime error [RE]",
-            "value": props.verdictdata.RUNTIME_ERROR,
-            "fill": "#5C3700"
-        },
-        {
-            "name": "Security violated",
-            "value": props.verdictdata.SECURITY_VIOLATED,
-            "fill": "#683E69"
-        },
-        {
-            "name": "Skipped",
-            "value": props.verdictdata.SKIPPED,
-            "fill": "#2C2C2C"
-        },
-        {
-            "name": "Testing",
-            "value": props.verdictdata.TESTING,
-            "fill": "#008B37"
-        },
-        {
-            "name": "Time limit exceeded [TLE]",
-            "value": props.verdictdata.TIME_LIMIT_EXCEEDED,
-            "fill": "#AB7100"
-        },
-        {
-            "name": "Wrong answer [WA]",
-            "value": props.verdictdata.WRONG_ANSWER,
-            "fill": "#FF0000"
-        }
-    ];
-    const totalValue = verdictData.reduce((sum, verdict) => sum + (verdict.value || 0), 0);
-    return (
-        <div style={{ marginBottom: '50px'}}>
-            <h4 style={{ width: '100%', textAlign: 'center', color: 'red' }}>Submission Verdicts</h4>
-            <div className='VerdictContainer'>
-                <div style={{ width: '250px', minWidth: '250px' }} className='VerdictLegend'>
-                    {verdictData.map((verdict, index) => < div className='VerdictLegendItems' key={index} style={{ color: verdict.fill }}> {verdict.name} : {verdict.value} </div>)}
+  const totalValue = verdictData.reduce((sum, verdict) => sum + (verdict.value || 0), 0);
+
+  return (
+    <div className="mb-12 p-6 rounded-xl">
+      {/* Title */}
+      <h4 className="text-center text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-[#05CBDC] mb-8">
+        Submission Verdicts
+      </h4>
+
+      {/* Container */}
+      <div className="flex flex-col md:flex-row items-center gap-6">
+        {/* Legend */}
+        <div className="bg-[#1E2230] p-4 rounded-lg backdrop-blur-md">
+          <h5 className="text-lg font-semibold text-[#05CBDC] text-center mb-4">Verdict Summary</h5>
+          {verdictData.map(
+            (verdict, index) =>
+              verdict.value > 0 && (
+                <div
+                  key={index}
+                  className="flex justify-between items-center mb-2 transition-transform transform hover:scale-105 hover:text-white group"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="w-4 h-4 rounded-full transition-shadow duration-300 group-hover:shadow-lg group-hover:shadow-[rgba(0,255,255,0.6)]"
+                      style={{ backgroundColor: verdict.fill }}
+                    ></span>
+                    <span className="text-sm text-white">{verdict.name}</span>
+                  </div>
+                  <span className="text-sm font-semibold text-[#05CBDC]">
+                    {verdict.value}
+                  </span>
                 </div>
-                <ResponsiveContainer width='100%' height='100%'>
-                    <PieChart >
-                        <Pie data={verdictData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={'100%'} fill="#82ca9d" />
-                        <Tooltip 
-                    formatter={(value)=>
-                        `${((value / totalValue) * 100).toFixed(2)}%`
-                    }
-                    />
-                    </PieChart>
-                </ResponsiveContainer>
-            </div>
+              )
+          )}
         </div>
-    )
+
+        {/* Pie Chart */}
+        <ResponsiveContainer width="100%" height={400}>
+          <PieChart>
+            <Pie
+              data={verdictData}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius="80%"
+              label={({ name, value }) => `${name}: ${(value / totalValue * 100).toFixed(1)}%`}
+              labelLine={false}
+            >
+              {verdictData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.fill} />
+              ))}
+            </Pie>
+            <Tooltip
+  formatter={(value) => `${((value / totalValue) * 100).toFixed(1)}%`}
+  contentStyle={{
+    backgroundColor: '#1E40AF', // Bright blue background (Tailwind `blue-800`)
+    borderRadius: '8px',
+    color: '#E0F2FE', // Off-white text (Tailwind `cyan-100`)
+    border: '1px solid #60A5FA', // Soft blue border (Tailwind `blue-400`)
+    padding: '8px', // Add some padding for a cleaner look
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)', // Subtle shadow for depth
+  }}
+  cursor={{ fill: 'rgba(96, 165, 250, 0.15)' }} // Light blue hover effect (Tailwind `blue-400`)
+/>
+
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
 }
-
-
