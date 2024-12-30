@@ -38,7 +38,6 @@ export default function UserHome() {
         cfID=id;
     }
     console.log(cfID)
-    cfID = 'Benq';
 
     let userData = { status: "", data: {} };
     let userRating = { status: "", data: {} };
