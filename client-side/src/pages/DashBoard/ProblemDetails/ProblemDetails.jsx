@@ -31,7 +31,7 @@ function ProblemCard(props) {
   const color = verdictData.find(item => item.value === props.verdict)?.fill || '#6b7280';
 
   return (
-    <div className="bg-zinc-800 text-white shadow-lg border border-zinc-700 rounded-lg p-4 mb-4 relative transition-transform hover:scale-[1.02]">
+    <div className="bg-gray-800 text-white shadow-lg border border-gray-700 rounded-lg p-4 mb-4 relative transition-transform hover:scale-[1.02]">
       <div className="flex flex-col space-y-3">
         <div className="text-lg font-semibold">{props.index}: {props.name}</div>
         <div className="text-sm" style={{ color }}>
@@ -58,12 +58,12 @@ export default function ProblemDetails(props) {
   const currentProblems = props.problemData.slice(index * 20, index * 20 + 20);
 
   return (
-    <div className=" min-h-screen border-2 p-6 text-white">
-      <h4 className="text-2xl font-bold mb-6 text-gray-100">Problems Solved</h4>
+    <div className="bg-gray-900 min-h-screen p-6 text-white">
+      <h4 className="text-3xl md:text-5xl font-bold mb-6 text-[#05CBDC]">Problems Solved</h4>
 
       <div className="flex justify-between items-center mb-4">
         <button
-          className="bg-zinc-700 text-white px-4 py-2 rounded-md hover:bg-zinc-600 focus:outline-none"
+          className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 focus:outline-none"
           onClick={() => setIndex(index > 0 ? index - 1 : 0)}
         >
           Prev

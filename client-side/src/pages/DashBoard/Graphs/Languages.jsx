@@ -9,9 +9,9 @@ export default function LanguageGraph({ languagedata }) {
   }));
 
   return (
-    <div className="p-6 mb-12">
+    <div className="p-2">
       {/* Title */}
-      <h4 className="text-center text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500">
+      <h4 className="text-center text-3xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r text-[#05CBDC]">
         Languages Used
       </h4>
 

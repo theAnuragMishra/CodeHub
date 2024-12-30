@@ -175,12 +175,12 @@ export default function UserHome() {
 
             setPageHtml(
                 <>
-                <div className='background-pink-blue'>
+                <div className='bg-gradient-to-b from-gray-900 via-indigo-950 to-gray-950 px-1 md:px-4 py-6 pb-8'>
                     {/* <div className='navBarContainer'>
                         <NavBarSecond />
                     </div> */}
                     <NavSpace />
-                    <div className='UserHomeOuterContainer bg-gradient-to-b from-zinc-700 to-zinc-950'>
+                    <div className='UserHomeOuterContainer'>
                         <div className='UserHomeInnerContainer'>
                             <UserProfile name={userDetail.name} rank={userData.data.rank} image={userData.data.titlePhoto} userDetail={userDetail}/>
                             <div className='BottomUserHome '>
@@ -189,7 +189,6 @@ export default function UserHome() {
                                 <SubmissionVerdict verdictdata={userSubmissionVerdict} />
                                 <ProblemRating questionratingdata={userSubmissionRating} />
                                 <Languages languagedata={userLanguage} />
-                                <div style={{ height: '80px' }}></div>
                             </div>
                             <div>
                                 <ContestDetails contestData={userRating.data} />

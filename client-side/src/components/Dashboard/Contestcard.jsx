@@ -36,7 +36,7 @@ function ContestCard({ contestID, contestName, contestRank, ratingGain }) {
 export default function ContestDetails({ contestData }) {
   return (
     <div className="p-8 rounded-lg">
-      <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500 mb-6">
+      <h3 className="text-3xl md:text-5xl text-center font-bold text-transparent bg-clip-text text-[#05CBDC] mb-8">
         Contests
       </h3>
       <div className="overflow-x-auto w-full">

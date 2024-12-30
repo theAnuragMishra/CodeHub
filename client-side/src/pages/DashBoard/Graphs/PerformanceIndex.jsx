@@ -19,7 +19,7 @@ export default function ContestRankGraph({ ratingdata }) {
 
   return (
     <div className="w-full h-[400px] mt-4 mb-20 rounded-2xl p-6 lg:h-[400px] md:h-[300px] sm:h-[250px] xs:h-[200px] xxs:h-[150px]">
-      <h4 className="text-lg md:text-xl font-bold text-[#05CBDC] text-center mb-6">
+      <h4 className="text-3xl md:text-5xl font-bold text-[#05CBDC] text-center mb-6">
         Contest Performance Index
       </h4>
       <ResponsiveContainer width="100%" height="100%">

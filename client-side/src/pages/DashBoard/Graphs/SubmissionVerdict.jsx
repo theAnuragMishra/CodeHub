@@ -27,7 +27,7 @@ export default function VerdictGraph({ verdictdata }) {
   return (
     <div className="mb-12 p-6 rounded-xl">
       {/* Title */}
-      <h4 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#05CBDC] to-[#EA7BB0] mb-6">
+      <h4 className="text-center text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-[#05CBDC] mb-8">
         Submission Verdicts
       </h4>
 
@@ -76,15 +76,18 @@ export default function VerdictGraph({ verdictdata }) {
               ))}
             </Pie>
             <Tooltip
-              formatter={(value) => `${((value / totalValue) * 100).toFixed(1)}%`}
-              contentStyle={{
-                backgroundColor: '#1E2230',
-                borderRadius: '8px',
-                color: 'white',
-                border: '1px solid #05CBDC',
-              }}
-              cursor={{ fill: 'rgba(255, 255, 255, 0.15)' }}
-            />
+  formatter={(value) => `${((value / totalValue) * 100).toFixed(1)}%`}
+  contentStyle={{
+    backgroundColor: '#1E40AF', // Bright blue background (Tailwind `blue-800`)
+    borderRadius: '8px',
+    color: '#E0F2FE', // Off-white text (Tailwind `cyan-100`)
+    border: '1px solid #60A5FA', // Soft blue border (Tailwind `blue-400`)
+    padding: '8px', // Add some padding for a cleaner look
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)', // Subtle shadow for depth
+  }}
+  cursor={{ fill: 'rgba(96, 165, 250, 0.15)' }} // Light blue hover effect (Tailwind `blue-400`)
+/>
+
           </PieChart>
         </ResponsiveContainer>
       </div>

@@ -26,8 +26,8 @@ export default function QuestionRatingGraphs({ questionratingdata }) {
       <h4
         style={{
           textAlign: 'center',
-          color: 'rgb(93, 230, 224)',
-          fontSize: '20px',
+          color: '#05CBDC',
+          fontSize: '3vw',
           fontWeight: 'bold',
           marginBottom: '20px',
         }}
