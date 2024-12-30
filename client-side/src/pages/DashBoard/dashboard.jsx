@@ -9,7 +9,7 @@ import ProblemRating from './Graphs/ProblemRating';
 import ProfileImg from './UserInfo/ProfileImg';
 import '../../pages/pages.css';
 import UserDetail from './UserInfo/UserDetail';
-import ContestDetails from './ContestDetails/ContestDetails';
+// import ContestDetails from './ContestDetails/ContestDetails';
 import ProblemDetails from './ProblemDetails/ProblemDetails';
 import Languages from './Graphs/Languages';
 import NavSpace from '../../components/NavSpace';
@@ -18,6 +18,8 @@ import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import UserProfile from "../../components/Dashboard/UserProfile"
+import ContestDetails from '../../components/Dashboard/Contestcard';
 
 
 export default function UserHome() {
@@ -36,6 +38,7 @@ export default function UserHome() {
         cfID=id;
     }
     console.log(cfID)
+    cfID = 'Benq';
 
     let userData = { status: "", data: {} };
     let userRating = { status: "", data: {} };
@@ -179,12 +182,7 @@ export default function UserHome() {
                     <NavSpace />
                     <div className='UserHomeOuterContainer'>
                         <div className='UserHomeInnerContainer'>
-
-                            <div className='TopUserHome'>
-                                <RatingCard name={userDetail.name} rank={userData.data.rank} />
-                                <ProfileImg image={userData.data.titlePhoto} />
-                            </div>
-                            <UserDetail userDetail={userDetail} />
+                            <UserProfile name={userDetail.name} rank={userData.data.rank} image={userData.data.titlePhoto} userDetail={userDetail}/>
                             <div className='BottomUserHome background-white-trans'>
                                 <ContestRating ratingdata={userRating.data} />
                                 <PerformanceIndex ratingdata={userRating.data} />
