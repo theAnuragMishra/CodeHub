@@ -7,21 +7,24 @@ function ContestCard({ contestID, contestName, contestRank, ratingGain }) {
   const gainValue = Math.abs(ratingGain);
 
   return (
-    <div className="relative shadow-xl bg-gray-900 border border-gray-800 p-6 min-w-[300px] md:min-w-[350px] overflow-hidden rounded-2xl flex flex-col justify-end items-start transition-transform hover:scale-105">
-      <div className="absolute inset-0 transform scale-[0.9] rounded-full blur-2xl" />
+    <div className="relative p-6 min-w-[300px] md:min-w-[350px] overflow-hidden rounded-2xl flex flex-col justify-end items-start transition-transform  bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#334155] shadow-lg">
+      <div
+        className="absolute inset-0 border-2 rounded-2xl blur-md -z-10"
+        style={{
+          borderImage: "linear-gradient(to right, #10b981, #3b82f6, #ec4899) 1",
+        }}
+      ></div>
       <div className="relative z-10 w-full text-left">
-        <h2 className="font-semibold text-lg text-white">
+        <h2 className="font-semibold text-lg text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
           {contestID}: {contestName}
         </h2>
-        <p className="font-light text-base text-slate-300 mt-2">
-          Rank: {contestRank}
-        </p>
+        <p className="font-light text-base text-gray-400 mt-2">Rank: {contestRank}</p>
         <p
           className={`font-bold text-lg mt-2 ${ratingChangeColor} flex items-center`}
         >
           {arrow} {gainValue}
         </p>
-        <button className="mt-4 bg-teal-500 px-4 py-2 rounded-md text-white text-sm hover:bg-teal-400 transition">
+        <button className="mt-4 bg-gradient-to-r from-green-400 to-teal-400 px-4 py-2 rounded-md text-gray-900 font-semibold text-sm  transition">
           Explore
         </button>
       </div>
@@ -32,8 +35,10 @@ function ContestCard({ contestID, contestName, contestRank, ratingGain }) {
 
 export default function ContestDetails({ contestData }) {
   return (
-    <div className="bg-gray-950 p-8 rounded-lg">
-      <h3 className="text-2xl font-bold text-red-400 mb-6">Contests</h3>
+    <div className="p-8 rounded-lg">
+      <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500 mb-6">
+        Contests
+      </h3>
       <div className="overflow-x-auto w-full">
         <div className="flex space-x-6">
           {contestData

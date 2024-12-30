@@ -18,8 +18,8 @@ export default function ContestRankGraph({ ratingdata }) {
   }));
 
   return (
-    <div className="w-full h-[400px] mt-4 mb-20 rounded-2xl bg-gradient-to-br from-blue-300/50 via-white/20 to-blue-600/30 backdrop-blur-md p-6 shadow-lg lg:h-[400px] md:h-[300px] sm:h-[250px] xs:h-[200px] xxs:h-[150px]">
-      <h4 className="text-lg md:text-xl font-bold text-blue-700 text-center mb-6">
+    <div className="w-full h-[400px] mt-4 mb-20 rounded-2xl p-6 lg:h-[400px] md:h-[300px] sm:h-[250px] xs:h-[200px] xxs:h-[150px]">
+      <h4 className="text-lg md:text-xl font-bold text-[#05CBDC] text-center mb-6">
         Contest Performance Index
       </h4>
       <ResponsiveContainer width="100%" height="100%">
@@ -27,32 +27,48 @@ export default function ContestRankGraph({ ratingdata }) {
           data={RatingChangeData}
           margin={{ top: 20, right: 20, left: 10, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0, 0, 255, 0.2)" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.15)" />
           <XAxis
             dataKey="name"
-            tick={{ fill: 'rgba(0,0,255,0.7)', fontWeight: 'bold' }}
+            tick={{
+              fill: '#05CBDC',
+              fontWeight: 'bold',
+            }}
           />
           <YAxis
-            tick={{ fill: 'rgba(0,0,255,0.7)', fontWeight: 'bold' }}
+            tick={{
+              fill: '#EA7BB0',
+              fontWeight: 'bold',
+            }}
             domain={[0, 1]}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              backgroundColor: 'rgba(32, 0, 66, 0.9)',
               borderRadius: '8px',
-              color: 'black',
-              border: '1px solid rgba(0,0,255,0.2)',
+              color: 'white',
+              border: '1px solid #05CBDC',
             }}
-            labelStyle={{ color: 'blue', fontWeight: 'bold' }}
+            labelStyle={{
+              color: '#EA7BB0',
+              fontWeight: 'bold',
+            }}
           />
-          <Legend verticalAlign="top" wrapperStyle={{ color: 'blue' }} />
+          <Legend
+            verticalAlign="top"
+            wrapperStyle={{ color: '#05CBDC', fontWeight: 'bold' }}
+          />
           <Line
             name="Performance Index (PI for first rank is 1)"
             type="monotone"
             dataKey="uv"
-            stroke="blue"
+            stroke="#05CBDC" // Cyan
             strokeWidth={3}
-            dot={{ stroke: 'blue', strokeWidth: 2, fill: 'white' }}
+            dot={{
+              stroke: '#EA7BB0',
+              strokeWidth: 2,
+              fill: 'white',
+            }} // Pink dot
           />
         </LineChart>
       </ResponsiveContainer>

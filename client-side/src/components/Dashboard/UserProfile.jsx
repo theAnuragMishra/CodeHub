@@ -74,7 +74,7 @@ export default function UserProfile({ name, rank, image, userDetail }) {
   ];
 
   return (
-    <div className="max-w-6xl bg-black mx-auto py-12 px-6">
+    <div className="max-w-6xl mx-auto py-12 px-6">
       {/* Profile Section */}
       <div className="bg-white shadow-xl rounded-lg p-8 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-8">
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 
 export default function VerdictGraph({ verdictdata }) {
   const verdictData = [
@@ -25,29 +25,32 @@ export default function VerdictGraph({ verdictdata }) {
   const totalValue = verdictData.reduce((sum, verdict) => sum + (verdict.value || 0), 0);
 
   return (
-    <div className="mb-12 bg-gradient-to-b from-[#1E2A38] to-[#3E5060] p-6 rounded-lg shadow-2xl">
+    <div className="mb-12 p-6 rounded-xl">
       {/* Title */}
-      <h4 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 mb-6">
+      <h4 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#05CBDC] to-[#EA7BB0] mb-6">
         Submission Verdicts
       </h4>
 
       {/* Container */}
       <div className="flex flex-col md:flex-row items-center gap-6">
         {/* Legend */}
-        <div className="bg-white/10 backdrop-blur-md p-4 rounded-lg shadow-md max-w-xs">
-          <h5 className="text-lg font-semibold text-white text-center mb-4">Verdict Summary</h5>
+        <div className="bg-[#1E2230] p-4 rounded-lg backdrop-blur-md">
+          <h5 className="text-lg font-semibold text-[#05CBDC] text-center mb-4">Verdict Summary</h5>
           {verdictData.map(
             (verdict, index) =>
               verdict.value > 0 && (
-                <div key={index} className="flex justify-between items-center mb-2">
+                <div
+                  key={index}
+                  className="flex justify-between items-center mb-2 transition-transform transform hover:scale-105 hover:text-white group"
+                >
                   <div className="flex items-center gap-2">
                     <span
-                      className="w-4 h-4 rounded-full"
+                      className="w-4 h-4 rounded-full transition-shadow duration-300 group-hover:shadow-lg group-hover:shadow-[rgba(0,255,255,0.6)]"
                       style={{ backgroundColor: verdict.fill }}
                     ></span>
                     <span className="text-sm text-white">{verdict.name}</span>
                   </div>
-                  <span className="text-sm font-semibold text-white">
+                  <span className="text-sm font-semibold text-[#05CBDC]">
                     {verdict.value}
                   </span>
                 </div>
@@ -65,19 +68,22 @@ export default function VerdictGraph({ verdictdata }) {
               cx="50%"
               cy="50%"
               outerRadius="80%"
-              fill="#82ca9d"
-              label={(entry) => `${((entry.value / totalValue) * 100).toFixed(1)}%`}
+              label={({ name, value }) => `${name}: ${(value / totalValue * 100).toFixed(1)}%`}
               labelLine={false}
-            />
+            >
+              {verdictData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.fill} />
+              ))}
+            </Pie>
             <Tooltip
               formatter={(value) => `${((value / totalValue) * 100).toFixed(1)}%`}
               contentStyle={{
-                backgroundColor: '#2B3743',
+                backgroundColor: '#1E2230',
+                borderRadius: '8px',
                 color: 'white',
-                border: 'none',
-                borderRadius: '6px',
+                border: '1px solid #05CBDC',
               }}
-              cursor={{ fill: 'rgba(255, 255, 255, 0.2)' }}
+              cursor={{ fill: 'rgba(255, 255, 255, 0.15)' }}
             />
           </PieChart>
         </ResponsiveContainer>

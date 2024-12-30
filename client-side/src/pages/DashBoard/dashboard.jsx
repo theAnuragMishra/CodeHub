@@ -180,10 +180,10 @@ export default function UserHome() {
                         <NavBarSecond />
                     </div> */}
                     <NavSpace />
-                    <div className='UserHomeOuterContainer'>
+                    <div className='UserHomeOuterContainer bg-gradient-to-b from-zinc-700 to-zinc-950'>
                         <div className='UserHomeInnerContainer'>
                             <UserProfile name={userDetail.name} rank={userData.data.rank} image={userData.data.titlePhoto} userDetail={userDetail}/>
-                            <div className='BottomUserHome background-white-trans'>
+                            <div className='BottomUserHome '>
                                 <ContestRating ratingdata={userRating.data} />
                                 <PerformanceIndex ratingdata={userRating.data} />
                                 <SubmissionVerdict verdictdata={userSubmissionVerdict} />

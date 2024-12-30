@@ -9,59 +9,63 @@ export default function LanguageGraph({ languagedata }) {
   }));
 
   return (
-    <div className="p-6 bg-gradient-to-b from-[#1E293B] to-[#334155] rounded-lg shadow-lg mb-12">
+    <div className="p-6 mb-12">
       {/* Title */}
-      <h4 className="text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 mb-6">
+      <h4 className="text-center text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500">
         Languages Used
       </h4>
 
       {/* Chart Container */}
       <ResponsiveContainer width="100%" height={400}>
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={LanguageArr}>
-          <PolarGrid
-            stroke="#475569"
-            strokeOpacity={0.3}
-          />
+          <PolarGrid stroke="url(#gridGradient)" strokeOpacity={0.5} />
           <PolarAngleAxis
             dataKey="name"
-            tick={{ fill: "#A5B4FC", fontSize: 12, fontWeight: "bold" }}
+            tick={{ fill: "url(#textGradient)", fontSize: 14, fontWeight: "bold" }}
           />
           <PolarRadiusAxis
             angle={30}
             domain={[0, Math.max(...LanguageArr.map((item) => item.value))]}
-            tick={{ fill: "#93C5FD", fontSize: 10 }}
-            stroke="#475569"
+            tick={{ fill: "url(#textGradient)", fontSize: 12 }}
           />
           <Radar
-            name="Language Usage"
+            name="Usage Count"
             dataKey="value"
-            stroke="url(#gradientStroke)"
-            fill="url(#gradientFill)"
-            fillOpacity={0.7}
+            stroke="url(#strokeGradient)"
+            fill="url(#fillGradient)"
+            fillOpacity={0.8}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#1E293B",
-              border: "none",
-              borderRadius: "8px",
-              color: "white",
+              backgroundColor: "#0f172a",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              borderRadius: "10px",
+              color: "#a1a1aa",
             }}
             formatter={(value) => [`${value}`, "Count"]}
-            itemStyle={{ color: "#93C5FD" }}
+            itemStyle={{ color: "cyan" }}
           />
         </RadarChart>
       </ResponsiveContainer>
 
-      {/* SVG Gradient */}
+      {/* SVG Gradients */}
       <svg>
         <defs>
-          <linearGradient id="gradientFill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="fillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#7C3AED" />
-            <stop offset="100%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#E11D48" />
           </linearGradient>
-          <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#7C3AED" />
-            <stop offset="100%" stopColor="#3B82F6" />
+          <linearGradient id="strokeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#10B981" />
+          </linearGradient>
+          <linearGradient id="gridGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4ADE80" />
+            <stop offset="100%" stopColor="#06B6D4" />
+          </linearGradient>
+          <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FF9F43" />
+            <stop offset="100%" stopColor="#E11D48" />
           </linearGradient>
         </defs>
       </svg>
