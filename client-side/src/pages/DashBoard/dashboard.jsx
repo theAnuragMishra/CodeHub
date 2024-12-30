@@ -9,7 +9,6 @@ import ProblemRating from './Graphs/ProblemRating';
 import ProfileImg from './UserInfo/ProfileImg';
 import '../../pages/pages.css';
 import UserDetail from './UserInfo/UserDetail';
-// import ContestDetails from './ContestDetails/ContestDetails';
 import ProblemDetails from './ProblemDetails/ProblemDetails';
 import Languages from './Graphs/Languages';
 import NavSpace from '../../components/NavSpace';
@@ -17,27 +16,28 @@ import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import UserProfile from "../../components/Dashboard/UserProfile"
+import { useNavigate, useParams } from 'react-router-dom';
+import UserProfile from "../../components/Dashboard/UserProfile";
 import ContestDetails from '../../components/Dashboard/Contestcard';
-
 
 export default function UserHome() {
 
+    const navigate = useNavigate();
+
     // Declared Data members
-    const {user}= useSelector((state)=> state.auth);
+    const { user } = useSelector((state) => state.auth);
+    console.log("user in There =======> ", user);
     const [PageHtml, setPageHtml] = useState(<>
         <NavSpace />
         <Spinner />
     </>);
 
-    // const params = useParams()
-    const {id}= useParams();
+    const { id } = useParams();
     let cfID = user ? user.cfID : null;
-    if(id){
-        cfID=id;
+    if (id) {
+        cfID = id;
     }
-    console.log(cfID)
+    console.log(cfID);
 
     let userData = { status: "", data: {} };
     let userRating = { status: "", data: {} };
@@ -59,13 +59,46 @@ export default function UserHome() {
         HighestRatingGain: 0
     }
 
-
     async function fetchData() {
+        // CDid Verification check
+        if (!cfID) {
+            setPageHtml(
+                <>
+                    <NavSpace />
+                    <div className="background-pink-blue" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Alert heading={"Invalid User ID"} body={"Please provide a valid Codeforces ID."} />
+                    </div>
+                </>
+            );
+            return;
+        }
+
+        if (!user?.cfVerified) {
+            setPageHtml(
+                <div className="w-screen h-screen bg-gradient-to-br from-purple-600 via-blue-500 to-indigo-800 flex items-center justify-center">
+                    <div className="text-center p-8 bg-gradient-to-br from-indigo-900 to-gray-900 rounded-lg shadow-lg border border-indigo-400">
+                        <h2 className="text-2xl font-bold text-white mb-4">
+                            Please verify your Codeforces ID
+                        </h2>
+                        <p className="text-white mb-6">
+                            Verify your account to access full profile details and get personalized insights.
+                        </p>
+                        <button
+                            onClick={() => navigate("/verify-cf-id")}  // Navigate to the '/verify-cf-id' page
+                            className="mt-6 px-6 py-2 bg-gradient-to-br from-green-400 to-blue-500 text-white font-bold rounded-full shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out"
+                        >
+                            Verify Now
+                        </button>
+                    </div>
+                </div>
+            );
+            return;
+        }
+        
 
         // API calls and Initialisation of Data Members
-
         try {
-            console.log(cfID)
+            console.log(cfID);
             const userDataAPI = await axios.get("https://codeforces.com/api/user.info?handles=" + cfID);
             const userRatingAPI = await axios.get("https://codeforces.com/api/user.rating?handle=" + cfID);
             const userSubmissionsAPI = await axios.get("https://codeforces.com/api/user.status?handle=" + cfID);
@@ -80,7 +113,7 @@ export default function UserHome() {
             userSubmissions.status = userSubmissionsAPI.data.status;
             userSubmissions.data = userSubmissionsAPI.data.result;
 
-            userLanguage.status = userSubmissionsAPI.data.status
+            userLanguage.status = userSubmissionsAPI.data.status;
 
             console.log("user first name:", userData.data.firstName);
             if (userData.data.firstName === undefined && userData.data.lastName === undefined) {
@@ -175,14 +208,11 @@ export default function UserHome() {
             setPageHtml(
                 <>
                 <div className='bg-gradient-to-b from-gray-900 via-indigo-950 to-gray-950 px-1 md:px-4 py-6 pb-8'>
-                    {/* <div className='navBarContainer'>
-                        <NavBarSecond />
-                    </div> */}
                     <NavSpace />
                     <div className='UserHomeOuterContainer'>
                         <div className='UserHomeInnerContainer'>
                             <UserProfile name={userDetail.name} rank={userData.data.rank} image={userData.data.titlePhoto} userDetail={userDetail}/>
-                            <div className='BottomUserHome '>
+                            <div className='BottomUserHome'>
                                 <ContestRating ratingdata={userRating.data} />
                                 <PerformanceIndex ratingdata={userRating.data} />
                                 <SubmissionVerdict verdictdata={userSubmissionVerdict} />
@@ -202,9 +232,6 @@ export default function UserHome() {
         } catch (error) {
             setPageHtml(
                 <>
-                    {/* <div id='navBarLandingPageContainer'>
-                        <NavBarSecond />
-                    </div> */}
                     <NavSpace />
                     <div className="background-pink-blue" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Alert heading={"Couldn't fetch data"} body={"Check your internet connection and try again.."} />
@@ -214,13 +241,9 @@ export default function UserHome() {
         }
     }
 
-
     useEffect(() => {
         fetchData();
     }, [cfID]);
 
-
-    return (
-        <>{PageHtml}</>
-    );
+    return <>{PageHtml}</>;
 }
