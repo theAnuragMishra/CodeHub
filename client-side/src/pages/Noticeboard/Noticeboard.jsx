@@ -68,7 +68,7 @@ export default function NoticeBoard() {
               />
             })}
             <div className='notice-footer'>
-              This was the last Notice from CodeTogether. Either no Notice prior to this was ever created or they have been deleted by the admins.
+              This was the last Notice from Computer Coding Club. Either no Notice prior to this was ever created or they have been deleted by the admins.
             </div>
           </div>
           <Footer />
