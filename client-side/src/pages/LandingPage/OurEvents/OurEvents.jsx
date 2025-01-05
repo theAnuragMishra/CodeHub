@@ -33,7 +33,16 @@ export default function OurEvents() {
         eventName: "Code Sangam",
         summary: "A unified blend of development events based on all known tech stacks organised annually by Motilal Nehru National Institute of Technology",
         registrationStatus: false
-    },];
+    },{
+        eventName: "OPC",
+        summary: "Open Programming Challenge is a programming contest organised within the college. Its frequency is not predefined and hence can be organised several times in the same academic year.",
+        registrationStatus: false
+    },{
+        eventName: "Bit-O-Mania",
+        summary: "An ACM-ICPC styled competitive programming contest organised in collaboration with other institutes. It may not be organised every year.",
+        registrationStatus: false
+    },
+];
 
 
     return (

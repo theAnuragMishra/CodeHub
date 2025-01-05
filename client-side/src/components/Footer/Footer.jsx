@@ -47,7 +47,16 @@ export default function Footer() {
       <p><a href='https://www.linkedin.com/in/imsubratpandey/'>Subrat Pandey</a></p>
       <p><a href='https://www.linkedin.com/in/archana1203/'>Archana Yadav</a></p>
       <p><a href='https://www.linkedin.com/in/janhavi-rai24/'>Janhavi Rai</a></p>
+    <br/>
+
+    <div>
+      <p><b>Do you wish to contribute in CodeHub?</b></p>
+      <hr/>
+      <p>CodeHub is open-sourced for MNNIT students to cultivate a vibrant culture of open-source learning within the college community.</p>
+      <p>Check out CodeHub's <a href='https://github.com/adityarai0705/CodeHub'><u>Github repository</u></a></p>
+    </div>
   </div>
+  
 </footer>
 
   )
