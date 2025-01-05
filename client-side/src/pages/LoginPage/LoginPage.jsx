@@ -73,7 +73,7 @@ export function Login() {
           <h1 className="text-3xl md:text-4xl font-bold text-center text-[#D1D1FF] mb-6">
             Login to your account
           </h1>
-          <p style={{'textAlign': 'center'}}>Use Chrome (version:120.0 or higher)</p>
+          <p style={{'textAlign': 'center'}}>Use Chrome Desktop(version:120.0 or higher)</p>
 
           <form onSubmit={handleSubmit}>
             {/* Email */}
