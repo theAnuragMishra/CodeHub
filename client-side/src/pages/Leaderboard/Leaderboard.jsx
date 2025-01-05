@@ -109,6 +109,7 @@ export default function Leaderboard() {
                         </div> */}
                         <NavSpace />
                         <div className='leader-heading'>Leaderboard</div>
+                        <p style={{'textAlign':'center'}}>Inactive participant's ratings are considered 0(zero).</p>
                         <div>
                             {LeaderComponent}
                         </div>
