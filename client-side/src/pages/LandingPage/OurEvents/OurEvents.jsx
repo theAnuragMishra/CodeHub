@@ -55,9 +55,9 @@ export default function OurEvents() {
                     return (
                         <div className='w-[20rem] '>
                             <BackgroundGradient>
-                                <div className='bg-gray-900 flex flex-col gap-y-5 rounded-3xl p-5 h-[20rem]'>
+                                <div className='bg-gray-900 flex flex-col gap-y-5 rounded-3xl p-5 h-[20rem] overflow-auto'>
                                     <h3 className='text-white text-2xl font-medium'>{event.eventName}</h3>
-                                    <p className='text-slate-400 text-lg'>{event.summary}</p>
+                                    <p className='text-slate-400 text-lg h-[10rem] overflow-auto'>{event.summary}</p>
                                     {
                                         (event.registrationStatus)
                                             ?
