@@ -31,7 +31,8 @@ function ProblemCard(props) {
   const color = verdictData.find(item => item.value === props.verdict)?.fill || '#6b7280';
 
   return (
-    <div className="bg-gray-800 text-white shadow-lg border border-gray-700 rounded-lg p-4 mb-4 relative transition-transform hover:scale-[1.02]">
+    <div className="bg-gray-800 text-white shadow-lg border border-gray-700 rounded-lg p-4 mb-4 relative transition-transform hover:scale-[1.02]"
+        onClick={() => { window.location.href = "https://codeforces.com/contest/" + props.contestId + "/problem/" + props.index}}>
       <div className="flex flex-col space-y-3">
         <div className="text-lg font-semibold">{props.index}: {props.name}</div>
         <div className="text-sm" style={{ color }}>
@@ -56,6 +57,8 @@ export default function ProblemDetails(props) {
   const [index, setIndex] = useState(0);
   const totalPage = Math.ceil(props.problemData.length / 20);
   const currentProblems = props.problemData.slice(index * 20, index * 20 + 20);
+
+  console.log( "curproblem: ", currentProblems);
 
   return (
     <div className="bg-gray-900 min-h-screen p-6 text-white">
@@ -88,6 +91,7 @@ export default function ProblemDetails(props) {
             difficulty={curProblem.problem.rating}
             verdict={curProblem.verdict}
             time={curProblem.timeConsumedMillis}
+            contestId={curProblem.contestId}
           />
         ))}
       </div>

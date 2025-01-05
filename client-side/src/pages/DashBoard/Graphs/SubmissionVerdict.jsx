@@ -68,7 +68,7 @@ export default function VerdictGraph({ verdictdata }) {
               cx="50%"
               cy="50%"
               outerRadius="80%"
-              label={({ name, value }) => `${name}: ${(value / totalValue * 100).toFixed(1)}%`}
+              // label={({ name, value }) => `${""}: ${(value / totalValue * 100).toFixed(1)}%`}
               labelLine={false}
             >
               {verdictData.map((entry, index) => (
