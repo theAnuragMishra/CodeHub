@@ -30,7 +30,7 @@ export default function Footer() {
     <span>&#169; {year} CodeHub. All Rights Reserved.</span>
   </div>
   <div className="LinkContainer">
-    <a href="mailto:computer.club@mnnit.ac.in" className="FooterLink">Contact Us</a>
+    {/* <a href="mailto:computer.club@mnnit.ac.in" className="FooterLink">Contact Us</a> */}
   </div>
   <div className='additionalInfo'>
     <p><b>Contributors</b></p>
