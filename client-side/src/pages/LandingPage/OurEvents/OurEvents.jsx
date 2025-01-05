@@ -19,11 +19,11 @@ export default function OurEvents() {
     // EVENTS DEMO DATA
     const eventsData = [{
         eventName: "Insomnia",
-        summary: "An ACM-ICPC styled team based competitive programming contest organised by Motilal Nehru National Institute of Technology Annually in its Technical fest Avhiskar",
+        summary: "An ACM-ICPC styled team based competitive programming contest organised by Motilal Nehru National Institute of Technology Annually in its Technical fest Avishkar",
         registrationStatus: false
     }, {
         eventName: "Code Of The Day",
-        summary: "An ACM-ICPC styled 7-days long solo competitive programming contest organised by Motilal Nehru National Institute of Technology Annually in its Technical fest Avhiskar",
+        summary: "An ACM-ICPC styled 7-days long solo competitive programming contest organised by Motilal Nehru National Institute of Technology Annually in its Technical fest Avishkar",
         registrationStatus: false,
     }, {
         eventName: "Hack-36",
