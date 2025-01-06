@@ -175,7 +175,7 @@ function Navbar() {
                         className="hover:text-accent tracking-widest transition-colors cursor-pointer duration-300"
                         onClick={() => navigate("/")}
                     >
-                        HOME
+                        Home
                     </h2>
                     <h2
                         className="hover:text-accent tracking-widest transition-colors cursor-pointer duration-300"
@@ -187,7 +187,7 @@ function Navbar() {
                         className="hover:text-accent tracking-widest transition-colors cursor-pointer duration-300"
                         onClick={() => navigate("/notice-board")}
                     >
-                        NoticeBoard
+                        Notice Board
                     </h2>
                 </div>
 

@@ -174,20 +174,20 @@ const HamburgerMenu = () => {
               <a href="/contact-us">Contact Us</a>
             </li>
             <li className="py-2 px-4 hover:text-blue1">
-              <a href="/notice-board">NoticeBoard</a>
+              <a href="/notice-board">Notice Board</a>
             </li>
           </ul>
 
           {auth ? (
             <div
               ref={dropdownRef}
-              className="relative w-[9.8rem] flex flex-col items-center"
+              className="relative w-[12rem] flex flex-col items-center"
             >
               <button
                 onClick={handleProfileClick}
-                className="w-full h-[4rem] bg-accent hover:bg-white hover:text-register"
+                className="w-full h-[3.5rem] bg-accent hover:bg-white hover:text-register"
               >
-                PROFILE
+                Profile
               </button>
               {dropdownOpen && (
                 <div className="absolute top-[4rem] w-full bg-primary rounded-lg shadow-lg">
@@ -209,7 +209,7 @@ const HamburgerMenu = () => {
             </div>
           ) : (
             <a href="/login">
-              <button className="w-[9.8rem] h-[4rem] bg-accent hover:bg-white hover:text-register">
+              <button className="w-[12rem] h-[4rem] bg-accent hover:bg-white hover:text-register">
                 Login
               </button>
             </a>
