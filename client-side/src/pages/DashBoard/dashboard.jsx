@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserProfile from "../../components/Dashboard/UserProfile";
 import ContestDetails from '../../components/Dashboard/Contestcard';
+import Heatmap from './HeatMap/HeatMap';
 
 export default function UserHome() {
 
@@ -215,6 +216,7 @@ export default function UserHome() {
                             <div className='BottomUserHome'>
                                 <ContestRating ratingdata={userRating.data} />
                                 <PerformanceIndex ratingdata={userRating.data} />
+                                <Heatmap handle={cfID} />
                                 <SubmissionVerdict verdictdata={userSubmissionVerdict} />
                                 <ProblemRating questionratingdata={userSubmissionRating} />
                                 {/* <Languages languagedata={userLanguage} /> */}
