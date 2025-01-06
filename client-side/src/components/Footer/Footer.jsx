@@ -2,10 +2,25 @@ import React from 'react';
 import './Footer.css';
 import NiTLogo from './mnnit_logo.png';
 import CTLogo from './logo_half.png';
-
+import Contributors from './Contributors';
 export default function Footer() {
   const today = new Date();
   const year = today.getFullYear();
+  const contributors = [
+    { name: 'Aditya Raj Rai', link: 'https://www.linkedin.com/in/link-aditya-rai/' },
+    { name: 'Mrinal Varshney', link: 'https://www.linkedin.com/in/mrinal-varshney-971a27250/' },
+    { name: 'Ayush Tiwari', link: 'https://www.linkedin.com/in/ayush-tiwari-84a823281/' },
+    { name: 'Sumit Verma', link: 'https://www.linkedin.com/in/sumit-verma-smt/' },
+    { name: 'Aishwarya Vikram Singh', link: 'https://www.linkedin.com/in/a-v-singh/' },
+    { name: 'Aryan Singh', link: 'https://www.linkedin.com/in/aryan-singh-44a931251/' },
+    { name: 'Khanak Patwari', link: 'https://www.linkedin.com/in/khanak-patwari/' },
+    { name: 'Kavya Agarwal', link: 'https://www.linkedin.com/in/kagarwal1811/' },
+    { name: 'Akhil Gupta', link: 'https://www.linkedin.com/in/akhil-g-131923136/' },
+    { name: 'Subrat Pandey', link: 'https://www.linkedin.com/in/imsubratpandey/' },
+    { name: 'Archana Yadav', link: 'https://www.linkedin.com/in/archana1203/' },
+    { name: 'Janhavi Rai', link: 'https://www.linkedin.com/in/janhavi-rai24/' },
+    { name: 'Nishant Mohan', link: 'https://www.linkedin.com/in/nishant-mohan-58931927a/' },
+  ];
   return (
     // <div className='FooterContainer'>
     //     <div className='footerTitle'>
@@ -35,18 +50,7 @@ export default function Footer() {
   <div className='additionalInfo'>
     <p><b>Contributors</b></p>
     <hr/>
-      <p><a href='https://www.linkedin.com/in/link-aditya-rai/'>Aditya Raj Rai</a></p>
-      <p><a href='https://www.linkedin.com/in/mrinal-varshney-971a27250/'>Mrinal Varshney</a></p>
-      <p><a href='https://www.linkedin.com/in/ayush-tiwari-84a823281/'>Ayush Tiwari</a></p>
-      <p><a href='https://www.linkedin.com/in/sumit-verma-smt/'>Sumit Verma</a></p>
-      <p><a href='https://www.linkedin.com/in/a-v-singh/'>Aishwarya Vikram Singh</a></p>
-      <p><a href='https://www.linkedin.com/in/aryan-singh-44a931251/'>Aryan Singh</a></p>
-      <p><a href='https://www.linkedin.com/in/khanak-patwari/'>Khanak Patwari</a></p>
-      <p><a href='https://www.linkedin.com/in/kagarwal1811/'>Kavya Agarwal</a></p>
-      <p><a href='https://www.linkedin.com/in/akhil-g-131923136/'>Akhil Gupta</a></p>
-      <p><a href='https://www.linkedin.com/in/imsubratpandey/'>Subrat Pandey</a></p>
-      <p><a href='https://www.linkedin.com/in/archana1203/'>Archana Yadav</a></p>
-      <p><a href='https://www.linkedin.com/in/janhavi-rai24/'>Janhavi Rai</a></p>
+      <Contributors contributors={contributors}/>
     <br/>
 
     <div>
