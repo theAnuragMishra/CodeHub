@@ -195,7 +195,7 @@ const authAPI = {
     handleVerifyCfID,
     handleVerifyEmail,
     checkSession,
-    handleLogout
+    handleLogout,
 }
 
 export default authAPI;

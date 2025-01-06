@@ -6,7 +6,7 @@ const generateCfVerificationRequestToken = require("./auth/genrateCfVerificaiton
 const checkSession = require("./auth/checkSession")
 const userFeedback = require("./userFeedBack");
 const logout = require("./auth/logout");
-
+const ForgetPassword = require("./auth/ForgetPassword");
 module.exports = {
     login,
     register,
@@ -15,5 +15,6 @@ module.exports = {
     generateCfVerificationRequestToken,
     checkSession,
     userFeedback,
-    logout
+    logout,
+    ForgetPassword
 };

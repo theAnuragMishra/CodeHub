@@ -15,7 +15,7 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import ProtectedRoute from './components/auth/ProtectRoute';
 import Navbar from './components/NavBar/NavBar';
 import { AuthWrapper } from './lib/AuthWrapper';
-
+import ForgotPassword from './pages/SignUp/ForgetPassword';
 export default function App() {
 
 
@@ -28,6 +28,9 @@ export default function App() {
                     <Route path={"/"} element={<LandingPage />} />
                     <Route path={"/login"} element={<LoginPage />} />
                     <Route path={"/signUp"} element={<Signup />} />
+                    {/* Route for Forgot Password */}
+                    <Route path={"/forgot-password"} element={<ForgotPassword />} />
+
                     <Route path={"/verify-email"} element={<VerifyEmail />} />
                     <Route path={"/verify-cf-id"} element={<VerifyCfID />} />
                     <Route path={"/education/videos"} element={<VideoLists />} />

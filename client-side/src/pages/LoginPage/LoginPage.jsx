@@ -146,6 +146,13 @@ export function Login() {
               Sign Up
             </Link>
           </p>
+          {/* Forgot Password Link */}
+          <p className="mt-4 text-center text-[#C5C5FF]">
+            Forgot Password?{" "}
+            <Link to="/forgot-password" className="text-blue-400 hover:text-blue-500">
+              Reset Password
+            </Link>
+          </p>
         </div>
         <Toaster />
       </div>
