@@ -185,7 +185,7 @@ const HamburgerMenu = () => {
             >
               <button
                 onClick={handleProfileClick}
-                className="w-full h-[3.5rem] bg-accent hover:bg-white hover:text-register"
+                className="w-full h-[3.5rem] bg-accent hover:bg-white hover:text-register rounded-md"
               >
                 Profile
               </button>
@@ -193,14 +193,14 @@ const HamburgerMenu = () => {
                 <div className="absolute top-[4rem] w-full bg-primary rounded-lg shadow-lg">
                   <a href="/dashboard">
                   <button
-                    className="block w-full text-center py-2 hover:bg-blue1"
+                    className="block w-full text-center py-2 hover:bg-blue1 rounded-md"
                   >
                     Dashboard
                   </button>
                   </a>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-center py-2 hover:bg-red-500"
+                    className="block w-full text-center py-2 hover:bg-red-500 rounded-md"
                   >
                     Logout
                   </button>
@@ -209,7 +209,7 @@ const HamburgerMenu = () => {
             </div>
           ) : (
             <a href="/login">
-              <button className="w-[12rem] h-[4rem] bg-accent hover:bg-white hover:text-register">
+              <button className="w-[12rem] h-[4rem] bg-accent hover:bg-white hover:text-register rounded-md">
                 Login
               </button>
             </a>
