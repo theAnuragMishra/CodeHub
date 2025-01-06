@@ -9,7 +9,7 @@ const {
 
 const controller = require("../controllers/Client/controller");
 const verifyCookie = require("../middleware/verifyCookie");
-
+const verifyPasswordReq = require("../middleware/verifyPasswordReq");
 const router = require("express").Router();
 
 // Routes that require authentication
@@ -28,5 +28,22 @@ router.post("/verifyEmail", controller.verifyEmail);
 router.post("/verifyCfID", controller.verifyCfID);
 router.post("/requestCfVerification", controller.generateCfVerificationRequestToken);
 
+
+//For Changing Password
+
+// @route POST api/forgetPassword
+// @desc Forget Password
+// @access Public
+router.post("/forgetPassword",controller.ForgetPassword.ForgetPassword);
+
+// @route POST api/verifyPasswordChangeOTP
+// @desc Confirm User
+// @access Public
+router.post("/verifyPasswordChangeOTP",verifyPasswordReq, controller.ForgetPassword.VerifyPasswordChangeOTP);
+
+// @route POST api/confirmPasswordChange
+// @desc Confirm Password Change
+// @access Public
+router.post("/confirmPasswordChange",verifyPasswordReq,controller.ForgetPassword.ConfirmPasswordChange);
 
 module.exports = router;
