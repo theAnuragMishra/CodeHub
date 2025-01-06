@@ -136,48 +136,107 @@
     height: 4.5rem !important;
 }
 
-.additionalInfo{
-    width: 80%;
-}
 .contributors {
     width: 100%;
     max-width: 800px;
-    text-align: left;
-    margin: 0 0;
+    margin: 20px auto; 
     padding: 20px;
+    background-color: #282828; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
   }
-  
+  .grid-contributors{
+    background-color: rgb(30,30,30);
+  }
   .contributorsGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    gap: 20px; /* Space between items */
+    gap: 20px; 
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
   .contributorItem {
-    text-align: left; /* Center align text */
+    padding: 15px;
+    text-align: left; 
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .contributorItem:hover {
+    transform: translateY(-5px); 
   }
   
   .contributorLink {
-    color: #fbfbfb;
+    color: #e6e6e6; 
     text-decoration: none;
     font-size: 1rem;
+    font-weight: 500;
   }
   
   .contributorLink:hover {
-    color: #9ef2ff;
+    color: #ffcc00;
   }
   
-@media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     .contributorsGrid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
     }
-}
-
-@media screen and (max-width: 480px) {
+  }
+  
+  @media screen and (max-width: 480px) {
     .contributorsGrid {
-        grid-template-columns: repeat(1, 1fr); /* 1 column */
-    }    
-}
+      grid-template-columns: repeat(1, 1fr); /* 1 column */
+    }
+  }
+  
+.contributeSection {
+    background-color: #2a2929; /* Subtle light background */
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ddd; /* Add a border for separation */
+    border-radius: 8px;
+    text-align: center; /* Center align content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .contributeSection h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .sectionDivider {
+    width: 50px;
+    height: 2px;
+    background-color: #ffcc00;
+    border: none;
+    margin: 10px auto;
+  }
+  
+  .contributeText {
+    font-size: 1rem;
+    color: #666;
+    margin: 10px 0 20px;
+  }
+  
+  .contributeLink {
+    text-decoration: none;
+  }
+  
+  .contributeButton {
+    background-color: #ffcc00;
+    color: #121a27;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .contributeButton:hover {
+    background-color: #e0b800; /* Darker shade on hover */
+  }
+  

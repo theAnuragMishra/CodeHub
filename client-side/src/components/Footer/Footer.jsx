@@ -47,20 +47,27 @@ export default function Footer() {
   <div className="LinkContainer">
     {/* <a href="mailto:computer.club@mnnit.ac.in" className="FooterLink">Contact Us</a> */}
   </div>
-  <div className='additionalInfo'>
-    <p><b>Contributors</b></p>
-    <hr/>
+  <hr className="sectionDivider" />
+    <div className='additionalInfo'>
+      <div className='contributors'>
+      <h3>Do you wish to contribute to CodeHub?</h3>
+      <p className="contributeText">
+        CodeHub is open-sourced for MNNIT students to cultivate a vibrant culture of open-source learning within the college community.
+      </p>
+      <a
+        href="https://github.com/adityarai0705/CodeHub"
+        className="contributeLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button className="contributeButton">Visit CodeHub on GitHub</button>
+      </a>
+    </div>
+    <hr className="sectionDivider " />
+    <p className='mt-10'><b>Contributors</b></p>
       <Contributors contributors={contributors}/>
     <br/>
-
-    <div>
-      <p><b>Do you wish to contribute in CodeHub?</b></p>
-      <hr/>
-      <p>CodeHub is open-sourced for MNNIT students to cultivate a vibrant culture of open-source learning within the college community.</p>
-      <p>Check out CodeHub's <a href='https://github.com/adityarai0705/CodeHub'><u>Github repository</u></a></p>
-    </div>
   </div>
-  
 </footer>
 
   )
