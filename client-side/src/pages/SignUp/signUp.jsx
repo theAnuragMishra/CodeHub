@@ -52,7 +52,7 @@ function Signup() {
             return;
         }
 
-        const resultAction = await dispatch(signUp(formData));
+        const resultAction =await dispatch(signUp(formData));
         if (signUp.fulfilled.match(resultAction)) {
             navigate("/verify-email", { state: { cfID: formData.cfID, email: formData.email } });
         }

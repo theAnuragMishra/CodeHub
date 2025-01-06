@@ -26,7 +26,7 @@ function VerifyEmail() {
             return;
         }
 
-        const resultAction = await dispatch(verifyEmail({ email }))
+        const resultAction = await dispatch(verifyEmail({ email, verificationCode }))
         if (verifyEmail.fulfilled.match(resultAction)) {
             toast.success("Email verified successfully", {
                 duration: 2000,

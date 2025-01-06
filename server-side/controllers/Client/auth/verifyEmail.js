@@ -26,7 +26,11 @@ const verifyToken = AsyncErrorHandler(async (req, res, next) => {
         if (user.emailVerified) {
             res.status(400).json({ success: false, message: "Email already verified" });
         }
-
+    
+        //Check the token
+        if (tokenExists.code !== token.code) {
+            return res.status(400).json({ success: false, message: "Invalid token" });
+        }
         //Update user's email verification status
         user.emailVerified = true;
         await user.save();

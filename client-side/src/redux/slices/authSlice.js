@@ -51,9 +51,9 @@ export const signUp = createAsyncThunk('auth/signUp', async ({ username, cfID, e
 })
 
 //Email Verification
-export const verifyEmail = createAsyncThunk('auth/verifyEmail', async ({ email }, { rejectWithValue }) => {
+export const verifyEmail = createAsyncThunk('auth/verifyEmail', async ({ email, verificationCode }, { rejectWithValue }) => {
     try {
-        const response = await authAPI.handleVerifyEmail({ email });
+        const response = await authAPI.handleVerifyEmail({ email, verificationCode });
         if (response.success) {
             return response.data;
         }
