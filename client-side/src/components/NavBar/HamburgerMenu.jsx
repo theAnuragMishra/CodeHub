@@ -174,33 +174,33 @@ const HamburgerMenu = () => {
               <a href="/contact-us">Contact Us</a>
             </li>
             <li className="py-2 px-4 hover:text-blue1">
-              <a href="/notice-board">NoticeBoard</a>
+              <a href="/notice-board">Notice Board</a>
             </li>
           </ul>
 
           {auth ? (
             <div
               ref={dropdownRef}
-              className="relative w-[9.8rem] flex flex-col items-center"
+              className="relative w-[12rem] flex flex-col items-center"
             >
               <button
                 onClick={handleProfileClick}
-                className="w-full h-[4rem] bg-accent hover:bg-white hover:text-register"
+                className="w-full h-[3.5rem] bg-accent hover:bg-white hover:text-register rounded-md"
               >
-                PROFILE
+                Profile
               </button>
               {dropdownOpen && (
                 <div className="absolute top-[4rem] w-full bg-primary rounded-lg shadow-lg">
                   <a href="/dashboard">
                   <button
-                    className="block w-full text-center py-2 hover:bg-blue1"
+                    className="block w-full text-center py-2 hover:bg-blue1 rounded-md"
                   >
                     Dashboard
                   </button>
                   </a>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-center py-2 hover:bg-red-500"
+                    className="block w-full text-center py-2 hover:bg-red-500 rounded-md"
                   >
                     Logout
                   </button>
@@ -209,7 +209,7 @@ const HamburgerMenu = () => {
             </div>
           ) : (
             <a href="/login">
-              <button className="w-[9.8rem] h-[4rem] bg-accent hover:bg-white hover:text-register">
+              <button className="w-[12rem] h-[4rem] bg-accent hover:bg-white hover:text-register rounded-md">
                 Login
               </button>
             </a>
