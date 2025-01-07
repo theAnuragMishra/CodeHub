@@ -82,7 +82,14 @@ const VerifyCfID = AsyncErrorHandler(async (req, res, next) => {
 
         //after email and cfid both are verified
         //creating new user
-        const newUser = new User(user);
+        const newUser = new User({
+            cfID: user.cfID,
+            password: user.password,
+            username: user.username,
+            email: user.email,
+            emailVerified: true,
+            cfVerified: true
+    });
         await newUser.save();
 
         //delete the temporary user
