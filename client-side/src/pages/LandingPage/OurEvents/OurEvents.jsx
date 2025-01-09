@@ -41,7 +41,11 @@ export default function OurEvents() {
         eventName: "Bit-O-Mania",
         summary: "An ACM-ICPC styled competitive programming contest organised in collaboration with other institutes. It may not be organised every year.",
         registrationStatus: false
-    },
+    }, {
+        eventName: "Weekend Of Code",
+        summary: "Weekend of Code is a week-long event designed to introduce first-year students to Development (DevJam), Competitive Programming (CodeStart), and AI/ML (Turing's Playground), fostering hands-on learning and skill-building in these key tech domains.",
+        registrationStatus: false
+    }
 ];
 
 
